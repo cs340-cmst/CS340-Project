@@ -1,11 +1,10 @@
 <?php
     session_start();
 
-    $usernameError = "";
-    $passwordError = "";
+    $error_field = "";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        handle_signup($usernameError, $passwordError);
+        handle_signup($error_field);
     }
 ?>
 
@@ -21,10 +20,9 @@
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         
         Username: <input name="username" type="text" />
-        <span class="error">* <?php echo "$usernameError"; ?></span>
+        <span class="error">* <?php echo "$error_field"; ?></span>
         <br><br>
         Password: <input name="password" type="password" />
-        <span class="error">* <?php echo "$passwordError"; ?></span>
         <br><br>
              
         <input name="submit" type="submit" value="Signup" />
@@ -34,37 +32,52 @@
 </html>
 
 <?php
-    function handle_signup(&$usernameError, &$passwordError) {
+    function handle_signup(&$error_field) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        require('includes/dbconnection.php');
+        $result = search_db_for_user($username);
 
-        $query = "SELECT * FROM Accounts WHERE username = '$username'";
-
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) == 0) {                  // Username not found.
-        
-            // Check username and password for valid characters.
-            if (validate($username, $password, $usernameError, $passwordError)) {
+        if (user_not_found($result)) {
+            if (valid_characters($username, $password, $error_field)) {
                 // Hash password.
                 $salt = generate_salt();
-                $hash = hash("sha256", $password . $salt);
+                $hash = hash('sha256', $password . $salt);
 
-                // Insert new user into the database.
-                insert_user_into_database($conn, $username, $hash, $salt);
+                $success = insert_user_into_database($username, $hash, $salt);
 
-                // Log the user in.
-                $_SESSION['username'] = $username;
-                $_SESSION['type'] = 'user';
-
-                header('Location: index.php');
+                if (!$success) {
+                    $error_field = "Error occurred in registering user.";
+                }
+                else {
+                    login_user($username, 'user');
+                    header('Location: index.php');
+                }
             }
-    
         }
-        else {                                              // Username found in the database.
-            $usernameError = "That username is taken.";
+        else {
+            $error_field = "That username is taken.";
         }
+    }
+
+    function search_db_for_user($username) {
+        require('includes/dbconnection.php');
+
+        $query = "SELECT * FROM Accounts WHERE username = ?";
+
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        return mysqli_stmt_get_result($stmt);
+    }
+
+    function user_not_found($result) {
+        return mysqli_num_rows($result) == 0;
+    }
+
+    function valid_characters($username, $password, &$error_field) {
+        // TODO ...
+        return true;
     }
 
     function generate_salt() {
@@ -79,17 +92,18 @@
         return $salt;
     }
 
-    function insert_user_into_database(&$conn, $username, $hash, $salt) {
-        $query = "INSERT INTO Accounts(username, hash, salt) VALUES('$username', '$hash', '$salt')";
-        $result = mysqli_query($conn, $query);
+    function insert_user_into_database($username, $hash, $salt) {
+        require('includes/dbconnection.php');
 
-        if (!$result) {
-            die("Failed to signup");
-        }
+        $query = "INSERT INTO Accounts(username, hash, salt) VALUES(?, ?, ?)";
+        
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "sss", $username, $hash, $salt);
+        return mysqli_stmt_execute($stmt);
     }
 
-    function validate($username, $password, &$usernameError, &$passwordError) {
-        // TODO ...
-        return true;
+    function login_user($username, $type) {
+        $_SESSION['username'] = $username;
+        $_SESSION['type'] = $type;
     }
 ?>
