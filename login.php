@@ -1,11 +1,10 @@
 <?php
     session_start();
 
-    $usernameError = "";
-    $passwordError = "";
+    $error_field = "";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        handle_login($usernameError, $passwordError);
+        handle_login($error_field);
     }
 ?>
 
@@ -20,10 +19,9 @@
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         
         Username: <input name="username" type="text" />
-        <span class="error"><?php echo "$usernameError"; ?></span>
+        <span class="error"><?php echo "$error_field"; ?></span>
         <br><br>
         Password: <input name="password" type="password" />
-        <span class="error"><?php echo "$passwordError"; ?></span>
         <br><br>
              
         <input name="submit" type="submit" value="Login" />
@@ -33,38 +31,47 @@
 </html>
 
 <?php
-    function handle_login(&$usernameError, &$passwordError) {
+    function handle_login(&$error_field) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        require('includes/dbconnection.php');
+        $result = search_db_for_user($username);
 
-        $query = "SELECT * FROM Accounts WHERE username = '$username'";
-
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) == 1) {               // Username found. Check password.
+        if (user_found($result)) {     
             $row = mysqli_fetch_assoc($result);
-
             $hash = $row['hash'];
             $salt = $row['salt'];
 
-            if (hash('sha256', $password . $salt) == $hash) {
-                // Valid login.
-                // Assign session variables;
-            
-                $_SESSION['username'] = $username;
-                $_SESSION['type'] = $row['type'];
-
+            if (is_correct_password($password, $hash, $salt)) {
+                login_user($username, $row['type']);
                 header('Location: index.php');
             }
-            else {
-                $usernameError = "Incorrect username or password.";
-                $passwordError = "Incorrect username or password.";
-            }
         }
-        else {                                              // Username not found in the database.
-            $usernameError = "Incorrect username or password.";
-            $passwordError = "Incorrect username or password.";
-        }
+
+        $error_field = "Incorrect username or password.";
+    }
+
+    function search_db_for_user($username) {
+        require('includes/dbconnection.php');
+
+        $query = "SELECT * FROM Accounts WHERE username = ?";
+
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        return mysqli_stmt_get_result($stmt);
+    }
+
+    function user_found($result) {
+        return mysqli_num_rows($result) == 1;
+    }
+
+    function is_correct_password($password, $hash, $salt) {
+        return hash('sha256', $password . $salt) == $hash;
+    }
+
+    function login_user($username, $type) {
+        $_SESSION['username'] = $username;
+        $_SESSION['type'] = $type;
     }
 ?>
