@@ -39,7 +39,7 @@
         $result = search_db_for_user($username);
 
         if (user_not_found($result)) {
-            if (valid_characters($username, $password, $error_field)) {
+            if (valid_characters($username, $password)) {
                 // Hash password.
                 $salt = generate_salt();
                 $hash = hash('sha256', $password . $salt);
@@ -53,6 +53,9 @@
                     login_user($username, 'user');
                     header('Location: index.php');
                 }
+            }
+            else {
+                $error_field = "Username or password contain invalid characters.";
             }
         }
         else {
@@ -75,9 +78,8 @@
         return mysqli_num_rows($result) == 0;
     }
 
-    function valid_characters($username, $password, &$error_field) {
-        // TODO ...
-        return true;
+    function valid_characters($username, $password) {
+        return (!preg_match('/[^a-zA-Z0-9]/', $username)) && (!preg_match('/[^a-zA-Z0-9\!\@\#\$\%]/', $password));
     }
 
     function generate_salt() {
