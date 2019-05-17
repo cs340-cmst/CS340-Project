@@ -17,9 +17,8 @@
 <body>
     <?php include('includes/header.php'); ?>
 
-    <p><span class="error">* required</span></p>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        
+        <p><span class="error">* required</span></p>
         Username: <input name="username" type="text" />
         <span class="error">* <?php echo "$usernameError"; ?></span>
         <br><br>
