@@ -1,3 +1,42 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#site-banner img {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+#nav-bar ul {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #bc9c78;
+}
+
+#nav-bar li {
+    float: left;
+}
+
+#nav-bar a {
+    display: block;
+    padding: 20px 26px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+
+#nav-bar li a:hover {
+    background-color: #8e6436;
+}
+
+form {
+    margin: 10px;
+}
+
 .error {
     color: red;
 }

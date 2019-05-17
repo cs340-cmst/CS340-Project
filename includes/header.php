@@ -1,4 +1,8 @@
-<nav>
+<header id="site-banner">
+    <img src="assets/header-background.jpg" style="width:100%;height:275px;" />
+</header>
+
+<nav id="nav-bar">
     <ul>
         <?php
             // Add basic menu items.
