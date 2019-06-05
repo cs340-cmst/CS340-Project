@@ -21,13 +21,13 @@
         <h1>Login</h1>
         <i class="fa fa-user fa-lg"></i>
         <input class="text-box" name="username" type="text" placeholder="Username" />
-        <span class="error"><?php echo "$error_field"; ?></span>
         <br><br>
         <i class="fa fa-key fa-lg"></i>
         <input class="text-box" name="password" type="password" placeholder="Password" />
         <br><br>
              
         <input class="button" name="submit" type="submit" value="Login" />
+        <span id="error-message" class="error"><?php echo "$error_field"; ?></span>
     </form>
 </body>
 </html>
@@ -46,7 +46,7 @@
 
             if (is_correct_password($password, $hash, $salt)) {
                 login_user($username, $row['type']);
-                header('Location: index.php');
+                redirect_user();
             }
         }
 
@@ -75,5 +75,12 @@
     function login_user($username, $type) {
         $_SESSION['username'] = $username;
         $_SESSION['type'] = $type;
+    }
+
+    function redirect_user() {
+        $host = $_SERVER['HTTP_HOST'];
+        $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'index.php';
+        header("Location: http://$host$uri/$extra");
     }
 ?>
