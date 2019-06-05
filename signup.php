@@ -1,6 +1,7 @@
 <?php
     session_start();
-
+    ob_start();
+    
     $error_field = "";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
