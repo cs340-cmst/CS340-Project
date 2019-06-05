@@ -40,3 +40,11 @@ form {
 .error {
     color: red;
 }
+
+#about-text {
+    background-color: grey;
+    width: 550px;
+    border: 15px solid black;
+    padding: 50px;
+    margin: 20px;
+}

@@ -12,15 +12,6 @@
 
 <body>
 
-<style>
-div {
-    background-color: grey;
-    width: 550px;
-    border: 15px solid black;
-    padding: 50px;
-    margin: 20px;
-}
-</style>
 
 <?php include('includes/header.php') ?>
 
@@ -29,7 +20,7 @@ div {
 </p>
 
 <center>
-    <div>
+    <div id="about-text">
         This website was created by the following four Oregon State students Timothy O’Rourke, Carson Pemble, Manuel Ochoa-Botello, and Sean Spink. The game was created as a project for the undergraduate course CS 340: Databases. This projects tests the ability to design and implement a web-based relational database system, using both php and an open-source database development system such as SQL. This project started with a project proposal and moved towards the creation of an ER diagram, relational schema, website layout and implementation, and finally to a peer review and class presentation.
     </div>
 </center>
