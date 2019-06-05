@@ -1,0 +1,67 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+
+header {
+    display: none;
+}
+
+body {
+    background-image: url("../assets/form-background.jpg");
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+form {
+    border: 6px solid #846450;
+    border-radius: 20px;
+    width: 50%;
+    height: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    text-align: center;
+}
+
+form h1 {
+    float: left;
+    font-size: 50px;
+    border-bottom: 4px solid #e00425;
+    left: 50%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 90px;
+    padding: 20px;
+    width: 75%;
+    
+}
+.text-box {
+    width: 50%;
+    overflow: hidden;
+    font-size: 25px;
+    padding: 16px 0;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid #e00425;
+    background: none;
+    color: white;
+}
+
+.button {
+    width: 25%;
+    font-size: 25px;
+    background: none;
+    padding: 10px;
+    border: 2px solid white;
+    cursor: pointer;
+    color: white;
+}
+
+form i {
+    width: 20px;
+    height: 15px;
+    text-align: center;
+    margin: 2px;
+}

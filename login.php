@@ -11,21 +11,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/forms.css" />
     </head>
 <body>
     <?php include('includes/header.php'); ?>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        
-        Username: <input name="username" type="text" />
+        <h1>Login</h1>
+        <i class="fa fa-user fa-lg"></i>
+        <input class="text-box" name="username" type="text" placeholder="Username" />
         <span class="error"><?php echo "$error_field"; ?></span>
         <br><br>
-        Password: <input name="password" type="password" />
+        <i class="fa fa-key fa-lg"></i>
+        <input class="text-box" name="password" type="password" placeholder="Password" />
         <br><br>
              
-        <input name="submit" type="submit" value="Login" />
-            
+        <input class="button" name="submit" type="submit" value="Login" />
     </form>
 </body>
 </html>
