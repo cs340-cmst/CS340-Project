@@ -21,7 +21,7 @@
         <h1>Signup</h1>
         <i class="fa fa-user fa-lg"></i>
         <input class="text-box" name="username" type="text" placeholder="Username" />
-        <span class="error">* <?php echo "$error_field"; ?></span>
+        <span class="error">*</span>
         <br><br>
         <i class="fa fa-lock fa-lg"></i>
         <input class="text-box" name="password" type="password" placeholder="Password" />
@@ -29,6 +29,7 @@
         <br><br>
              
         <input class="button" name="submit" type="submit" value="Signup" />
+        <span id="error-message" class="error"><?php echo "$error_field"; ?></span>
     </form>
 </body>
 </html>
@@ -53,7 +54,7 @@
                 }
                 else {
                     login_user($username, 'user');
-                    header('Location: index.php');
+                    redirect_user();
                 }
             }
             else {
@@ -109,5 +110,12 @@
     function login_user($username, $type) {
         $_SESSION['username'] = $username;
         $_SESSION['type'] = $type;
+    }
+
+    function redirect_user() {
+        $host = $_SERVER['HTTP_HOST'];
+        $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'index.php';
+        header("Location: http://$host$uri/$extra");
     }
 ?>
