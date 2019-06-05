@@ -21,10 +21,10 @@
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
         <h1>Login</h1>
         <i class="fa fa-user fa-lg"></i>
-        <input class="text-box" name="username" type="text" placeholder="Username" />
+        <input class="text-box" name="username" type="text" placeholder="Username" required />
         <br><br>
         <i class="fa fa-key fa-lg"></i>
-        <input class="text-box" name="password" type="password" placeholder="Password" />
+        <input class="text-box" name="password" type="password" placeholder="Password" required />
         <br><br>
              
         <input class="button" name="submit" type="submit" value="Login" />
