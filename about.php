@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-<body>
+<body background="http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg">
 
 
 <?php include('includes/header.php') ?>
