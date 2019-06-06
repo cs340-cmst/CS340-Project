@@ -13,6 +13,14 @@
 
 <?php include('includes/header.php') ?>
 
+<div id="title-card">
+    Battlewatch
+</div>
+
+<div id="site-brief">
+    A turn based 1v1 fight simulator.
+</div>
+
 <div id="front-page-most-wins">
 
 </div>
