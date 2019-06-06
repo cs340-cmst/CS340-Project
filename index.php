@@ -93,9 +93,9 @@
         var two = document.getElementById("level-2");
         var three = document.getElementById("level-3");
 
-        one.innerText = "1. " + obj[0].name + " " + "Level: " + obj[0].kills;
-        two.innerText = "2. " + obj[1].name + " " + "Level: " + obj[1].kills;
-        three.innerText = "3. " + obj[2].name + " " + "Level: " + obj[2].kills;
+        one.innerText = "1. " + obj[0].name + " " + "Level: " + obj[0].level;
+        two.innerText = "2. " + obj[1].name + " " + "Level: " + obj[1].level;
+        three.innerText = "3. " + obj[2].name + " " + "Level: " + obj[2].level;
     }
     
 </script>
