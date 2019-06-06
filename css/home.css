@@ -49,10 +49,10 @@ body {
 }
 
 .top-3-box {
-    background-color: black;
-    border: 2px solid red;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid white;
     width: 75%;
-    height: 25%;
+    height: 200px;
     margin: auto;
     margin-top: 200px;
     margin-bottom: 200px;
@@ -60,9 +60,18 @@ body {
     color: white;
 }
 
-#front-page-most-wins {
-    
+#top-kills {
+    font-size: 40px;
+    color: red;
 }
 
-#front-page-best-ratio {
+#highest-level {
+    font-size: 40px;
+    color: red;
+}
+
+.top-3-box div {
+    margin: 15px;
+    text-align: left;
+    font-size: 20px;
 }
