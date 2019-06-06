@@ -109,4 +109,100 @@ form {
 
 .error {
     color: red;
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#site-banner img {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+#nav-bar ul {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #bc9c78;
+    text-align: center;
+}
+
+#nav-bar li {
+    text-align: center;
+    display: inline;
+}
+
+#nav-bar a {
+    padding: 20px 26px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: inline-block;
+}
+
+#nav-bar li a:hover {
+    background-color: #8e6436;
+}
+
+form {
+    margin: 10px;
+}
+
+.error {
+    color: red;
+}
+
+.arena {
+  text-align: center;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.test {
+  text-align: center;
+}
+
+.drop{
+  width: 100%;
+  text-align: center;
+  text-align-last: center;
+  justify-content: center;
+}
+
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: red;
+  color: black;
+  padding: 14px 28px;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+}
+
+.block:hover {
+  background-color: gray;
+  color: white;
 }
