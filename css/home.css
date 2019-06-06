@@ -1,7 +1,20 @@
+html, body {
+    height: 100%;
+}
+
 body {
     background-image: url("../assets/home-background.jpg");
     background-size: cover;
 }
+
+.column {
+    float: left;
+    width: 33%;
+    height: 92%;
+    position: relative;
+}
+
+
 
 #title-card {
     border: 5px solid red;
@@ -13,7 +26,7 @@ body {
     background: rgba(255, 0, 0, 0.8);
     text-align: center;
     text-shadow: 4px 4px black;
-    width: 25%;
+    width: 75%;
 }
 
 #site-brief {
@@ -21,8 +34,35 @@ body {
     margin-top: 15px;
     padding: 15px;
     text-align: center;
-    width: 15%;
+    width: 45%;
     box-shadow: 6px 6px rgba(0, 0, 0, 0.5);
-    background: black;
+    background-color: black;
     color: white;
+}
+
+#top-3-boxes {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.top-3-box {
+    background-color: black;
+    border: 2px solid red;
+    width: 75%;
+    height: 25%;
+    margin: auto;
+    margin-top: 200px;
+    margin-bottom: 200px;
+    padding: 10px;
+    color: white;
+}
+
+#front-page-most-wins {
+    
+}
+
+#front-page-best-ratio {
 }
