@@ -10,7 +10,7 @@ body {
 .column {
     float: left;
     width: 33%;
-    height: 92%;
+    height: 75%;
     position: relative;
 }
 
@@ -58,20 +58,27 @@ body {
     margin-bottom: 200px;
     padding: 10px;
     color: white;
-}
-
-#top-kills {
-    font-size: 40px;
-    color: red;
-}
-
-#highest-level {
-    font-size: 40px;
-    color: red;
-}
-
-.top-3-box div {
-    margin: 15px;
-    text-align: left;
     font-size: 20px;
+}
+
+.top-3-header {
+    font-size: 70px;
+    color: red;
+}
+
+.top-3-row div {
+    display: inline;
+}
+
+.number-one {
+    font-size: 40px;
+    color: yellow;
+}
+
+.number-two {
+    color: silver;
+}
+
+.number-three {
+    color: brown;
 }

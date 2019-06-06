@@ -31,17 +31,41 @@
 <div class="column">
     <div id="top-3-boxes">
         <div class="top-3-box" id="front-page-most-kills">
-            <div id="top-kills">Top Kills</div>
-            <div id="most-kills-1"></div>
-            <div id="most-kills-2"></div>
-            <div id="most-kills-3"></div>
+            <div class="top-3-header">Top Kills</div>
+            <div class="top-3-row number-one" id="kills-1">
+                <div class="top-3-label-1">#1</div>
+                <div id="most-kills-name-1"></div>
+                <div id="most-kills-kills-1"></div>
+            </div>
+            <div class="top-3-row number-two" id="kills-2">
+                <div class="top-3-label-2">#2</div>
+                <div id="most-kills-name-2"></div>
+                <div id="most-kills-kills-2"></div>
+            </div>
+            <div class="top-3-row number-three" id="kills-3">
+                <div class="top-3-label-3">#3</div>
+                <div id="most-kills-name-3"></div>
+                <div id="most-kills-kills-3"></div>
+            </div>
         </div>
 
         <div class="top-3-box" id="front-page-highest-level">
-            <div id="highest-level">Highest Level</div>
-            <div id="level-1"></div>
-            <div id="level-2"></div>
-            <div id="level-3"></div>
+            <div class="top-3-header">Highest Level</div>
+            <div class="top-3-row number-one" id="level-1">
+                <div class="top-3-label-1">#1</div>
+                <div id="highest-level-name-1"></div>
+                <div id="highest-level-level-1"></div>
+            </div>
+            <div class="top-3-row number-two" id="level-2">
+                <div class="top-3-label-2">#2</div>
+                <div id="highest-level-name-2"></div>
+                <div id="highest-level-level-2"></div>
+            </div>
+            <div class="top-3-row number-three" id="level-3">
+                <div class="top-3-label-3">#3</div>
+                <div id="highest-level-name-3"></div>
+                <div id="highest-level-level-3"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -79,23 +103,35 @@
     }
 
     function fillMostKills(obj) {
-        var one = document.getElementById("most-kills-1");
-        var two = document.getElementById("most-kills-2");
-        var three = document.getElementById("most-kills-3");
+        var nameOne = document.getElementById("most-kills-name-1");
+        var nameTwo = document.getElementById("most-kills-name-2");
+        var nameThree = document.getElementById("most-kills-name-3");
+        var killsOne = document.getElementById("most-kills-kills-1");
+        var killsTwo = document.getElementById("most-kills-kills-2");
+        var killsThree = document.getElementById("most-kills-kills-3");
 
-        one.innerText = "1. " + obj[0].name + " " + obj[0].kills + " kills";
-        two.innerText = "2. " + obj[1].name + " " + obj[1].kills + " kills";
-        three.innerText = "3. " + obj[2].name + " " + obj[2].kills + " kills";
+        nameOne.innerText = obj[0].name;
+        nameTwo.innerText = obj[1].name;
+        nameThree.innerText = obj[2].name;
+        killsOne.innerText = obj[0].kills;
+        killsTwo.innerText = obj[1].kills;
+        killsThree.innerText = obj[2].kills;
     }
 
     function fillHighestLevel(obj) {
-        var one = document.getElementById("level-1");
-        var two = document.getElementById("level-2");
-        var three = document.getElementById("level-3");
+        var nameOne = document.getElementById("highest-level-name-1");
+        var nameTwo = document.getElementById("highest-level-name-2");
+        var nameThree = document.getElementById("highest-level-name-3");
+        var levelOne = document.getElementById("highest-level-level-1");
+        var levelTwo = document.getElementById("highest-level-level-2");
+        var levelThree = document.getElementById("highest-level-level-3");
 
-        one.innerText = "1. " + obj[0].name + " " + "Level: " + obj[0].level;
-        two.innerText = "2. " + obj[1].name + " " + "Level: " + obj[1].level;
-        three.innerText = "3. " + obj[2].name + " " + "Level: " + obj[2].level;
+        nameOne.innerText = obj[0].name;
+        nameTwo.innerText = obj[1].name;
+        nameThree.innerText = obj[2].name;
+        levelOne.innerText = obj[0].level;
+        levelTwo.innerText = obj[1].level;
+        levelThree.innerText = obj[2].level;
     }
     
 </script>
