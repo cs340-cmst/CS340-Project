@@ -48,3 +48,7 @@ form {
     padding: 50px;
     margin: 20px;
 }
+
+#about-background {
+    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
+}
