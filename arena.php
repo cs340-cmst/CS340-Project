@@ -183,19 +183,66 @@
     
     
     function fightTillDeath() {
-        global $char1Name, $char1Health, $char1Defense, $char1AttackSp;
-        global $char2Name, $char2Health, $char2Defense, $char2AttackSp;
+        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef;
+        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef;
  
-        //while ($char1Health > 0 or $char2Health > 0){
-            //$char1Health = $char1Health - $char2......
-        //}
-        
-        echo "<br>";
-        //echo "$char1Name, $char1Health, $char1Defense, $char1AttackSp, $char2Name, $char2Health, $char2Defense, $char2AttackSp <br>";
-        
+        while (True){
+            
+            if($char1AttackSp >= $char2AttackSp){       // Faster attack speed goes first
+                
+                // Character 1's Turn
+                if($char2ArmDef >= $char1WeapDam){
+                    $char2ArmDef = $char2ArmDef - ($char1WeapDam);       // Ware on the armor
+                }
+                else{
+                    $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
+                    if($char2Health <= 0){
+                        echo "<b> <center> $char1Name Wins!!! </center> </b>";
+                        break;
+                    }
+                }
+                
+                // Character 2's Turn
+                if($char1ArmDef >= $char2WeapDam){
+                    $char1ArmDef = $char1ArmDef - ($char2WeapDam);       // Ware on the armor
+                }
+                else{
+                    $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
+                    if($char1Health <= 0){
+                        echo "<b> <center> $char2Name Wins!!! </center> </b>";
+                        break;
+                    }
+                }
+
+            }
+            
+            else{
+                // Character 2's Turn
+                if($char1ArmDef >= $char2WeapDam){
+                    $char1ArmDef = $char1ArmDef - ($char2WeapDam);       // Ware on the armor
+                }
+                else{
+                    $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
+                }
+                
+                // Character 1's Turn
+                if($char2ArmDef >= $char1WeapDam){
+                    $char2ArmDef = $char2ArmDef - ($char1WeapDam);       // Ware on the armor
+                }
+                else{
+                    $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
+                }
+                
+            }
+            
+            //echo "<br>";
+            //echo "Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> ";
+            
+        }
+
+        echo "<br> <center> FINAL RESULTS </center> <br>";
+        echo "<center> CHARACTER 1: Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> CHARACTER 2: Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> </center>";
     }
     
 
     ?>
-
-
