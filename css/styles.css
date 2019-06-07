@@ -33,55 +33,28 @@ body {
     background-color: #8e6436;
 }
 
-#Profile-title {
-    
-}
-
-#row {
-    display: flex;
-}
-
-#column {
-    flex: 50%;
-}
-
-.btn {
-    color: Black;
-    font-size: 16px;
-    width: 100px;
-    border: 0;
-    border-radius: 10px;
-}
-
-.btnH{
-    background-color: darkred;
-    
-}
-
-.btnH:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
-}
-
-.btnM{
-    background-color: skyblue;
-    
-}
-
-.btnM:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
-}
-
-.btnS{
-    background-color: darkgreen;
-    
-}
-
-.btnS:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
-}
-
 form {
     margin: 10px;
+}
+
+.error {
+    color: red;
+}
+
+#about-text {
+    background-color: grey;
+    width: 550px;
+    border: 15px solid black;
+    padding: 50px;
+    margin: 20px;
+}
+
+#about-background {
+    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
+}
+
+#arena-background {
+    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-snow.jpg');
 }
 
 .error {
