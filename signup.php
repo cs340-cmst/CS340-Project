@@ -75,7 +75,9 @@
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "s", $username);
         mysqli_stmt_execute($stmt);
-        return mysqli_stmt_get_result($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        mysqli_close($conn);
+        return $result;
     }
 
     function user_not_found($result) {
@@ -105,7 +107,9 @@
         
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "sss", $username, $hash, $salt);
-        return mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_close($conn);
+        return $result;
     }
 
     function login_user($username, $type) {
