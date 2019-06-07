@@ -7,7 +7,7 @@
     <ul>
         <?php
             // Add basic menu items.
-            $menuitems = array("Home" => "index.php", "Fight" => "fight.php");
+            $menuitems = array("Home" => "index.php", "Fight" => "fight.php", "About" => "about.php");
             foreach ($menuitems as $label => $location) {
                 echo "<li><a href=$location>$label</a></li>";
             }

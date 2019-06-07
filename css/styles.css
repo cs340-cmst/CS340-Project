@@ -41,3 +41,15 @@ form {
 .error {
     color: red;
 }
+
+#about-text {
+    background-color: grey;
+    width: 550px;
+    border: 15px solid black;
+    padding: 50px;
+    margin: 20px;
+}
+
+#about-background {
+    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
+}
