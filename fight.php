@@ -18,7 +18,7 @@
 <body>
 <h2 class="arena"> ARENA NAME </h2>
 <form>
-<input class="drop">
+<?php getMap(); ?>
 </form>
 
 
@@ -26,49 +26,22 @@
 <div class="column">
 <h1 class="test"> Your Character </h1>
 <form>
-<select class="drop">
-<option value="pick">Select Your Character</option>
-<?php
-    include 'dbconnection.php';
-    $Username = $_SESSION['username'];
-    $sql = mysqli_query($connection, "SELECT name FROM Characters WHERE username= \"$Username\"");
-    
-    ?>
-
-
-
-</select>
+<?php getChars(); ?>
 </form>
-<h1 class="test"> Stats </h1>
-<ul>
-<li>Health:</li>
-<li>Attack:</li>
-<li>Speed:</li>
-<li>Armor:</li>
-<li>Weapon:</li>
-</ul>
 </div>
 
 <div class="column">
 <h1 class="test"> VS </h1>
-<button class="block"> FIGHT </button>
+<form action="/arena.php" target="_blank" method="POST">
+<input type="submit" value="FIGHT" class="block">
+</form>
 </div>
 
 <div class="column">
 <h1 class="test"> Enemy Character </h1>
 <form>
-<input class="drop">
-<!-- <select class="drop"><center></center>
-</select> -->
+<?php getEnemyChar(); ?>
 </form>
-<h1 class="test"> Stats </h1>
-<ul>
-<li>Health:</li>
-<li>Attack:</li>
-<li>Speed:</li>
-<li>Armor:</li>
-<li>Weapon:</li>
-</ul>
 </div>
 
 
@@ -78,3 +51,81 @@
 
 </body>
 </html>
+
+<?php
+    function getChars(){
+        require('includes/dbconnection.php');
+        $Username = $_SESSION['username'];
+        
+        $query = "SELECT * FROM Characters WHERE username = '$Username'";
+        
+        $result = $conn->query($query);
+        
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                $toINSERT = '<input type="radio" name="Characters[]">';
+                $toINSERT = $toINSERT. $row["name"];
+                $toINSERT = $toINSERT. '<br>';
+                $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
+                $toINSERT = $toINSERT. 'Defense:'. $row["defense"]. ' ';
+                $toINSERT = $toINSERT. 'Attack Speed:'. $row["attack speed"]. ' ';
+                $toINSERT = $toINSERT. 'Level:'. $row["level"].'<br>';
+                $toINSERT = $toINSERT. '<br>';
+                
+                echo $toINSERT;
+            }
+            
+            
+        } else {
+            echo "0 results";
+            
+        }
+        $conn->close();
+    }
+    
+    function getMap(){
+        require('includes/dbconnection.php');
+        $Username = $_SESSION['username'];
+        
+        $query = "SELECT name FROM Arenas ORDER BY RAND() LIMIT 1";
+        
+        $result = $conn->query($query);
+        
+        $row = $result->fetch_assoc();
+        $toINSERT = '<input name = "Characters[]" class="drop" value="'.$row["name"].'">';
+        echo $toINSERT;
+        
+        $conn->close();
+        
+    }
+    
+    function getEnemyChar(){
+        require('includes/dbconnection.php');
+        $Username = $_SESSION['username'];
+        
+        $query = "SELECT * FROM Characters WHERE username <> '$Username' ORDER BY RAND() LIMIT 1" ;
+        
+        $result = $conn->query($query);
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            $toINSERT = '<input name = "Characters[]" class="drop" value="'.$row["name"].'">';
+            $toINSERT = $toINSERT. '<br>';
+            $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
+            $toINSERT = $toINSERT. 'Defense:'. $row["defense"]. ' ';
+            $toINSERT = $toINSERT. 'Attack Speed:'. $row["attack speed"]. ' ';
+            $toINSERT = $toINSERT. 'Level:'. $row["level"].'<br>';
+            
+            echo $toINSERT;
+        }
+        else {
+            echo "no enemies available";
+        }
+        $conn->close();
+        
+        
+    }
+    
+    
+    
+    
+    ?>
