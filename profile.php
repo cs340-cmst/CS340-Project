@@ -56,40 +56,8 @@
                 echo $toINSERT;
             }
         } else {
-            echo "0 results";
+            echo "No Characters to Show";
         }
         $conn->close();
-    }
-    function addChars(){
-        
-    }
-    
-    function getTupleCount(){
-        require('includes/dbconnection.php');
-        $Username = $_SESSION['username'];
-        
-        $query = "SELECT COUNT(*) AS ct FROM Characters WHERE username = '$Username' GROUP BY username";
-        
-        $result = $conn->query($query);
-        $row = $result->fetch_assoc();
-        echo $row["ct"];
-        mysqli_close($conn);
-        return $row["ct"];
-        
-    }
-    function micCheck(){
-        require('includes/dbconnection.php');
-        $Username = $_SESSION['username'];
-        $query = "SELECT name FROM Characters WHERE username = '$Username'";
-        
-        $result = $conn->query($query);
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
-                echo "<p>" . $row["name"] . "</p>";
-            }
-        } else {
-            echo "0 results";
-        }
-        $conn->close();
-    }
+    }  
     ?>
