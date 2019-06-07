@@ -8,7 +8,8 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-<body style="background-color: grey;">
+//<body style="background-color: grey;">
+<body id="arena-background">  // Change this with the correct ARENA
 
 <?php include('includes/header.php') ?>
 

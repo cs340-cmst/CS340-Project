@@ -1,7 +1,6 @@
 body {
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
 }
 
 #site-banner img {
@@ -52,4 +51,8 @@ form {
 
 #about-background {
     background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
+}
+
+#arena-background {
+    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-snow.jpg');
 }
