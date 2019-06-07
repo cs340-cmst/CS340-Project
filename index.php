@@ -5,6 +5,9 @@
 <html>
 
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" href="css/home.css" />
         <title>Battlewatch</title>
@@ -14,11 +17,7 @@
 
 <?php include('includes/header.php') ?>
 
-<div class="column">
-    .
-</div>
-
-<div class="column">
+<div class="row">
     <div id="title-card">
         Battlewatch
     </div>
@@ -28,7 +27,7 @@
     </div>
 </div>
 
-<div class="column">
+<div class="row">
     <div id="top-3-boxes">
         <div class="top-3-box" id="front-page-most-kills">
             <div class="top-3-header">Top Kills</div>
