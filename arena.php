@@ -8,15 +8,26 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-//<body style="background-color: grey;">
-<body id="arena-background">  // Change this with the correct ARENA
+
+<body id="arena-background">
 
 <?php include('includes/header.php') ?>
 
-<div>
-    <?php get_Char1Stats(); ?>
-    <?php get_Char2Stats(); ?>
-    <?php fightTillDeath(); ?>
+
+<div class="row">
+
+    <div class="column" style="background-color: rgba(255, 255, 255, .4);" >
+        <?php get_Char1Stats(); ?>
+    </div>
+
+    <div class="column" style="background-color: rgba(235, 235, 235, .4);" >
+        <?php get_Char2Stats(); ?>
+    </div>
+
+    <div style="background-color: rgba(215, 215, 215, .4);" >
+        <?php fightTillDeath(); ?>
+    </div>
+
 </div>
 
 
@@ -33,11 +44,13 @@
         require('includes/dbconnection.php');
         
         $Username = $_SESSION['username'];
-        $Charname = 'Fred';  // -- Fred is just for testing -- //
+        $CharID = '3';          // -- Godd Howard is just for testing -- //
+        //$CharID = $_GET["cID"];
         
         global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef;
         
-        $query = "SELECT * FROM Characters WHERE username = '$Username' AND name = '$Charname'";
+        //$query = "SELECT * FROM Characters WHERE username = '$Username' AND cID = '$CharID'";
+        $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
@@ -110,11 +123,13 @@
         require('includes/dbconnection.php');
         
         $Username = $_SESSION['username'];
-        $Charname = 'Picard-io';  // -- Picard-io is just for testing -- //
+        $CharID = '11';          // -- Hodor is just for testing -- //
+        //$CharID = $_GET["cID2"];
         
         global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef;
         
-        $query = "SELECT * FROM Characters WHERE username = '$Username' AND name = '$Charname'";
+        //$query = "SELECT * FROM Characters WHERE username = '$Username' AND cID = '$CharID'";
+        $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
@@ -210,7 +225,7 @@
                 else{
                     $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
                     if($char1Health <= 0){
-                        echo "<b> <center> $char2Name Wins!!! </center> </b>";
+                        echo "<b> <center>  $char2Name Wins!!! </center> </b>";
                         break;
                     }
                 }
@@ -242,8 +257,8 @@
         }
 
         echo "<br> <center> FINAL RESULTS </center> <br>";
-        echo "<center> CHARACTER 1: Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> CHARACTER 2: Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> </center>";
+        echo "<center> $char1Name : Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> $char2Name : Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> <br> </center>";
     }
     
 
-    ?>
+?>
