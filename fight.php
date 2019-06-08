@@ -69,7 +69,8 @@
                 $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
                 $toINSERT = $toINSERT. 'Defense:'. $row["defense"]. ' ';
                 $toINSERT = $toINSERT. 'Attack Speed:'. $row["attack speed"]. ' ';
-                $toINSERT = $toINSERT. 'Level:'. $row["level"].'<br>';
+                $toINSERT = $toINSERT. 'Level:'. $row["level"]. ' ';
+                $toINSERT = $toINSERT. 'cID:'. $row["cID"].'<br>';
                 $toINSERT = $toINSERT. '<br>';
                 
                 echo $toINSERT;
@@ -113,7 +114,8 @@
             $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
             $toINSERT = $toINSERT. 'Defense:'. $row["defense"]. ' ';
             $toINSERT = $toINSERT. 'Attack Speed:'. $row["attack speed"]. ' ';
-            $toINSERT = $toINSERT. 'Level:'. $row["level"].'<br>';
+            $toINSERT = $toINSERT. 'Level:'. $row["level"]. ' ';
+            $toINSERT = $toINSERT. 'cID:'. $row["cID"].'<br>';
             
             echo $toINSERT;
         }
