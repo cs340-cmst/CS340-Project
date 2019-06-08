@@ -11,64 +11,63 @@ body {
 }
 
 form {
-    border: 6px solid #846450;
-    border-radius: 20px;
+    border: 0.375em solid #846450;
+    border-radius: 1.25em;
     width: 50%;
     height: 75%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    margin: auto;
+    margin-top: 2em;
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 40px;
+    padding: 2.5em;
     text-align: center;
 }
 
 form h1 {
     float: left;
-    font-size: 50px;
-    border-bottom: 4px solid #e00425;
+    font-size: 3.125em;
+    border-bottom: 0.08em solid #e00425;
     left: 50%;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 90px;
-    padding: 20px;
+    margin-bottom: 1.8em;
+    padding: 0.4em;
     width: 75%;
     
 }
 .text-box {
     width: 50%;
     overflow: hidden;
-    font-size: 25px;
-    padding: 16px 0;
-    margin: 8px 0;
+    font-size: 1.56em;
+    padding: 0.64em 0;
+    margin: 0.32em 0;
     border: none;
-    border-bottom: 1px solid #e00425;
+    border-bottom: 0.04em solid #e00425;
     background: none;
     color: white;
 }
 
 .button {
     width: 25%;
-    font-size: 25px;
+    font-size: 1.56em;
     background: none;
-    padding: 10px;
-    border: 2px solid white;
+    padding: 0.4em;
+    border: 0.08em solid white;
     cursor: pointer;
     color: white;
 }
 
 form i {
-    width: 20px;
-    height: 15px;
+    width: 1.25em;
+    height: 1em;
     text-align: center;
-    margin: 2px;
+    margin: 0.125em;
 }
 
 #error-message {
     width: 100%;
     float: left;
-    margin-top: 50px;
-    font-size: 35px;
+    margin-top: 3.125em;
+    font-size: 2.188em;
 }
