@@ -25,21 +25,21 @@
 <div class="row">
 <div class="column">
 <h1 class="test"> Your Character </h1>
-<form>
+<form action="arena.php" method="POST">
 <?php getChars(); ?>
 </form>
 </div>
 
 <div class="column">
 <h1 class="test"> VS </h1>
-<form action="/arena.php" target="_blank" method="POST">
+<form action="arena.php" method="POST">
 <input type="submit" value="FIGHT" class="block">
 </form>
 </div>
 
 <div class="column">
 <h1 class="test"> Enemy Character </h1>
-<form>
+<form action="arena.php" method="POST">
 <?php getEnemyChar(); ?>
 </form>
 </div>
