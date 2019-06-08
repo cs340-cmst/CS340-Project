@@ -10,14 +10,23 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body style="background-color: grey;">
+<body background="assets/ProfileBR.jpg" style="background-repeat: no-repeat; background-size: cover; background-color: black;">
 
 <?php include('includes/header.php') ?>
 
 <div id = "row">
-<div id = "Profile-title">
-<h1>Profile Overview</h1>
-</div>
+    <div id="column">
+    <div id = "Profile-title" style="color: white; text-shadow: 2px 2px #191919">
+        <h1>Profile Overview</h1>
+    </div>
+    <div id="column">
+        <div id = "stats"><p style="color: white;"> Legend: </p></div> 
+        <button class="btn btnH" style="background-color: darkred; width: 60px;"> Hp. </button>
+        <button class="btn btnM" style="background-color: lightskyblue; width: 60px;"> Def. </button>
+        <button class="btn btnS" style="background-color: green; width: 60px;"> Atk. </button>
+        
+    </div>
+    </div>
 </div>
 
 <div id = "Characters">
@@ -39,25 +48,24 @@
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-                $toINSERT = '<div id = "row">';
-                $toINSERT = $toINSERT. '<div id = "column">';
-                $toINSERT = $toINSERT.'<p>';
-                $toINSERT = $toINSERT. $row["name"] . '<p>';
+                $toINSERT = '<div id="row" style="background-color: rgba(0,0,0,0.5); border: 3px solid black;">';
+                $toINSERT = $toINSERT. '<div id="column">';
+                $toINSERT = $toINSERT.'<p style="color: white;">';
+                $toINSERT = $toINSERT. $row["name"] . '</p>';
                 $toINSERT = $toINSERT.'</div>';
-                $toINSERT = $toINSERT.'<div id = "column"><div id = "stats">';
-                $toINSERT = $toINSERT.'<p>Stats: <p><button class="btn btnH" style="background-color: darkred; width: 60px;">';
+                $toINSERT = $toINSERT.'<div id="column"><div id = "stats"><p style="color: white;">Stats: <p><button class="btn btnH" style="background-color: darkred; width: 60px;">';
                 $toINSERT = $toINSERT . $row["health"];
                 $toINSERT = $toINSERT . '</button> <button class="btn btnM" style="background-color: lightskyblue; width: 60px;">';
                 $toINSERT = $toINSERT . $row["defense"];
                 $toINSERT = $toINSERT . '</button> <button class="btn btnS" style="background-color: green; width: 60px;">';
                 $toINSERT = $toINSERT . $row["attack speed"];
-                $toINSERT = $toINSERT. '</button>';
-                $toINSERT = $toINSERT.'</div></div></div>';
+                $toINSERT = $toINSERT. '</button></div></div></div>';
                 echo $toINSERT;
             }
         } else {
             echo "No Characters to Show";
         }
+        
         $conn->close();
     }  
     ?>
