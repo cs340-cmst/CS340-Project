@@ -63,7 +63,7 @@
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-                $toINSERT = '<input type="radio" name="Characters[]">';
+                $toINSERT = '<input type="radio" name="character">';
                 $toINSERT = $toINSERT. $row["name"];
                 $toINSERT = $toINSERT. '<br>';
                 $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
@@ -87,12 +87,12 @@
         require('includes/dbconnection.php');
         $Username = $_SESSION['username'];
         
-        $query = "SELECT name FROM Arenas ORDER BY RAND() LIMIT 1";
+        $query = "SELECT * FROM Arenas ORDER BY RAND() LIMIT 1";
         
         $result = $conn->query($query);
         
         $row = $result->fetch_assoc();
-        $toINSERT = '<input name = "Characters[]" class="drop" value="'.$row["name"].'">';
+        $toINSERT = '<input name = "areanaMap" class="drop" value="'.$row["name"].'">';
         echo $toINSERT;
         
         $conn->close();
@@ -108,7 +108,7 @@
         $result = $conn->query($query);
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
-            $toINSERT = '<input name = "Characters[]" class="drop" value="'.$row["name"].'">';
+            $toINSERT = '<input name = "enemyCharacter" class="drop" value="'.$row["name"].'">';
             $toINSERT = $toINSERT. '<br>';
             $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
             $toINSERT = $toINSERT. 'Defense:'. $row["defense"]. ' ';
