@@ -44,10 +44,19 @@ form {
 
 #about-text {
     background-color: grey;
-    width: 34.38em;
+    width: 50vw;
     border: 1em solid black;
     padding: 3.125em;
     margin: 1.25em;
+    color: black;
+    border-radius: 3em;
+}
+
+#about-header {
+    background-color: white;
+    border-radius: 3em;
+    width: 13vw;
+    margin: auto;
 }
 
 #about-background {

@@ -13,8 +13,8 @@ body {
 form {
     border: 0.375em solid #846450;
     border-radius: 1.25em;
-    width: 50%;
-    height: 75%;
+    width: 50vw;
+    height: 75vh;
     position: relative;
     margin: auto;
     margin-top: 2em;
@@ -33,11 +33,11 @@ form h1 {
     margin-right: 10%;
     margin-bottom: 1.8em;
     padding: 0.4em;
-    width: 75%;
+    width: 37.5vw;
     
 }
 .text-box {
-    width: 50%;
+    width: 25vw;
     overflow: hidden;
     font-size: 1.56em;
     padding: 0.64em 0;
@@ -49,7 +49,7 @@ form h1 {
 }
 
 .button {
-    width: 25%;
+    width: 12.5vw;
     font-size: 1.56em;
     background: none;
     padding: 0.4em;
@@ -66,7 +66,7 @@ form i {
 }
 
 #error-message {
-    width: 100%;
+    width: 50vw;
     float: left;
     margin-top: 3.125em;
     font-size: 2.188em;
