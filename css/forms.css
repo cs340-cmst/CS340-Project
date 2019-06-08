@@ -18,21 +18,11 @@ body {
     font-family: sans-serif;
 }
 
-.Drop-Down{
-    width: 50%;
-    font-size:25px;
-    padding: 16px 0;
-    margin: 8px 0;
-    background-color: rgba(100,100,100, 0.5);
-    border: 1px solid #e00425;
-    
-}
-
 form {
     border: 0.375em solid #846450;
     border-radius: 1.25em;
     width: 50vw;
-    height: 75vh;
+    min-height: 75vh;
     position: relative;
     margin: auto;
     margin-top: 2em;
@@ -52,12 +42,20 @@ form h1 {
     margin-bottom: 1.8em;
     padding: 0.4em;
     width: 37.5vw;
-    
+}
+
+.Drop-Down{
+    width: 50%;
+    font-size: 1.56em;
+    padding: 1em 0;
+    margin: 0.5em 0;
+    background-color: rgba(100,100,100, 0.5);
+    border: 0.0625em solid #e00425;
 }
 
 select option {
     background-color: rgba(100,100,100, 0.1);
-    border: 1px solid #e00425;
+    border: 0.0625em solid #e00425;
 }
 
 .text-box {
@@ -73,7 +71,7 @@ select option {
 }
 
 .button {
-    width: 12.5vw;
+    min-width: 20%;
     font-size: 1.56em;
     background: none;
     padding: 0.4em;

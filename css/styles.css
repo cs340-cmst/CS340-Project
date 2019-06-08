@@ -77,10 +77,10 @@ form {
 
 .btn {
     color: Black;
-    font-size: 16px;
-    width: 100px;
+    font-size: 1em;
+    width: 6.25em;
     border: 0;
-    border-radius: 10px;
+    border-radius: 0.625em;
 }
 
 .btnH{
@@ -89,7 +89,7 @@ form {
 }
 
 .btnH:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
+     box-shadow: 0 0.75em 1em 0 rgba(0,0,0,0.24),0 1em 3.125em 0 rgba(0,0,0,0.19);  
 }
 
 .btnM{
@@ -98,7 +98,7 @@ form {
 }
 
 .btnM:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
+     box-shadow: 0 0.75em 1em 0 rgba(0,0,0,0.24),0 1em 3.125em 0 rgba(0,0,0,0.19);  
 }
 
 .btnS{
@@ -107,7 +107,7 @@ form {
 }
 
 .btnS:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
+     box-shadow: 0 0.75em 1em 0 rgba(0,0,0,0.24),0 1em 3.125em 0 rgba(0,0,0,0.19);  
 }
 
 
