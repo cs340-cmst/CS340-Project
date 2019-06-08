@@ -14,7 +14,7 @@
 
             // Add conditional menu items.
             $signedOutMenuItems = array("Signup" => "signup.php", "Login" => "login.php");
-            $signedInMenuItems = array("Profile" => "profile.php", "Logout" => "logout.php");
+            $signedInMenuItems = array("Profile" => "profile.php", "Create Character" => "create.php", "Logout" => "logout.php");
 
             if (!isset($_SESSION['username'])) {                        // Signed out.
                 foreach ($signedOutMenuItems as $label => $location) {

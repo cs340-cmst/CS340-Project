@@ -10,6 +10,24 @@ body {
     font-family: sans-serif;
 }
 
+.body-MK2 {
+    background-image: url("../assets/creation-room.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+    font-family: sans-serif;
+}
+
+.Drop-Down{
+    width: 50%;
+    font-size:25px;
+    padding: 16px 0;
+    margin: 8px 0;
+    background-color: rgba(100,100,100, 0.5);
+    border: 1px solid #e00425;
+    
+}
+
 form {
     border: 6px solid #846450;
     border-radius: 20px;
@@ -37,6 +55,12 @@ form h1 {
     width: 75%;
     
 }
+
+select option {
+    background-color: rgba(100,100,100, 0.1);
+    border: 1px solid #e00425;
+}
+
 .text-box {
     width: 50%;
     overflow: hidden;
