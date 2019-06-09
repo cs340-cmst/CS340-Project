@@ -44,21 +44,23 @@ body {
     color: white;
 }
 
-#top-3-boxes {
-    min-width: 100%;
+.top-3 {
     float: left;
-    margin: auto;
+    position: relative;
+    min-width: 50%;
 }
 
 .top-3-box {
     background-color: rgba(0, 0, 0, 0.8);
-    float: left;
-    display: inline;
+    position: relative;
     border: 0.1em solid white;
-    width: 25%;
-    padding: 0.25em 1em 0.25em 1em;
-    margin-top: 1.75%;
-    margin-left: 15%;
+    min-width: 20%;
+    max-width: 40%;
+    padding: 0.5em 1em 0.5em 1em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 15%;
     min-height: 32%;
     color: white;
     font-size: 1.25em;
