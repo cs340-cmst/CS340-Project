@@ -15,7 +15,7 @@
 <?php include('includes/header.php') ?>
 
 <p>
-    <center><b> About the Developers </b></center>
+    <center id="about-header"><b> About the Developers </b></center>
 </p>
 
 <center>

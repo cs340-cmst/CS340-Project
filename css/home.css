@@ -3,7 +3,8 @@ header {
 }
 
 html, body {
-    height: 100%;
+    height: 100vh;
+    font-size: 100%;
 }
 
 body {
@@ -13,58 +14,63 @@ body {
 
 .row {
     float: left;
-    width: 100%;
-    height: 45%;
+    width: 100vw;
+    height: 45vh;
     position: relative;
 }
 
 #title-card {
-    border: 5px solid red;
+    border: 0.083em solid red;
     margin: auto;
-    margin-top: 30px;
-    padding: 35px;
-    font-size: 60px;
+    margin-top: 0.5em;
+    padding: 0.58em;
+    font-size: 3.75em;
     color: white;
     background: rgba(255, 0, 0, 0.8);
     text-align: center;
-    text-shadow: 4px 4px black;
+    text-shadow: 0.067em 0.067em black;
     width: 25%;
+    word-wrap: break-word;
 }
 
 #site-brief {
     margin: auto;
-    margin-top: 15px;
-    padding: 15px;
+    margin-top: 1em;
+    padding: 1em;
     text-align: center;
-    width: 15%;
-    box-shadow: 6px 6px rgba(0, 0, 0, 0.5);
+    width: 15vw;
+    box-shadow: 0.375em 0.375em rgba(0, 0, 0, 0.5);
     background-color: black;
     color: white;
 }
 
-#top-3-boxes {
-    width: 100%;
+.top-3 {
     float: left;
-    margin: auto;
+    position: relative;
+    min-width: 50%;
 }
 
 .top-3-box {
     background-color: rgba(0, 0, 0, 0.8);
-    float: left;
-    display: inline;
-    border: 2px solid white;
-    width: 25%;
-    padding: 5px 20px 5px 20px;
-    margin-left: 15%;
-    height: 200px;
+    position: relative;
+    border: 0.1em solid white;
+    min-width: 20vw;
+    max-width: 20vw;
+    padding: 0.5em 1em 0.5em 1em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 15%;
+    min-height: 32%;
     color: white;
-    font-size: 20px;
+    font-size: 1.25em;
 }
 
 .top-3-header {
-    font-size: 75px;
+    font-size: 2em;
     color: red;
     text-align: center;
+    word-wrap: normal;
 }
 
 .top-3-row div {
@@ -72,7 +78,7 @@ body {
 }
 
 .number-one {
-    font-size: 50px;
+    font-size: 2.2em;
     color: yellow;
 }
 
