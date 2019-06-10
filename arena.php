@@ -51,13 +51,13 @@
     function get_Char1Stats(){
         require('includes/dbconnection.php');
         
-        //$Username = $_SESSION['username'];
         //$CharID = '3';          // -- Godd Howard is just for testing -- //
-        $CharID = $_SESSION['user'];
+        $CharID = $_POST['character'];
+        $user = $_SESSION['username'];
         
         global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
         
-        $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
+        $query = "SELECT * FROM Characters WHERE name = '$CharID' and username = '$user'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
