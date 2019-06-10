@@ -16,15 +16,15 @@
 
 <div class="row">
 
-    <div class="column" style="background-color: rgba(255, 255, 255, .4);" >
+    <div class="column" style="background-color: rgba(225, 225, 225, .3);" >
         <?php get_Char1Stats(); ?>
     </div>
 
-    <div class="column" style="background-color: rgba(235, 235, 235, .4);" >
+    <div class="column" style="background-color: rgba(235, 235, 235, .3);" >
         <?php get_Char2Stats(); ?>
     </div>
 
-    <div style="background-color: rgba(215, 215, 215, .4);" >
+    <div style="background-color: rgba(255, 255, 255, .4);" >
         <?php fightTillDeath(); ?>
     </div>
 
@@ -39,18 +39,24 @@
     $char1Name = $char1Health = $char1Defense = $char1AttackSp = $char1WeapDam = $char1ArmDef = "";
     $char2Name = $char2Health = $char2Defense = $char2AttackSp = $char2WeapDam = $char2ArmDef = "";
  
+    $NoChar1 = $NoChar2 = 0;
     
     function get_Char1Stats(){
         require('includes/dbconnection.php');
         
         $Username = $_SESSION['username'];
-        $CharID = '3';          // -- Godd Howard is just for testing -- //
-        //$CharID = $_GET["cID"];
+        //$CharID = '3';          // -- Godd Howard is just for testing -- //
+        //$CharID = $_POST['character'];
         
-        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef;
+        //echo "HERE...";
+        //echo $_POST["character"];
+        //echo "$CharID";
+        
+        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
         
         //$query = "SELECT * FROM Characters WHERE username = '$Username' AND cID = '$CharID'";
         $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
+        //$query = "SELECT * FROM Characters WHERE name = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
@@ -76,7 +82,8 @@
                 echo $toINSERT;
             }
         } else {
-            echo "No Character Selected";
+            echo "No Character Selected <br> ";
+            $NoChar1 = 1;
         }
         
         //----------- Weapon SQL ----------- //
@@ -124,9 +131,9 @@
         
         $Username = $_SESSION['username'];
         $CharID = '11';          // -- Hodor is just for testing -- //
-        //$CharID = $_GET["cID2"];
+        //$CharID = $_POST["enemyCharacter"];
         
-        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef;
+        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar2;
         
         //$query = "SELECT * FROM Characters WHERE username = '$Username' AND cID = '$CharID'";
         $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
@@ -155,7 +162,8 @@
                 echo $toINSERT;
             }
         } else {
-            echo "No Character Selected";
+            echo "No Character Selected <br> ";
+            $NoChar2 = 1;
         }
         
         //----------- Weapon SQL ----------- //
@@ -199,9 +207,11 @@
     
     
     function fightTillDeath() {
-        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef;
-        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef;
+        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
+        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar12;
  
+        if($NoChar1 == 0 && $NoChar1 == 0){
+        
         while (True){
             
             if($char1AttackSp >= $char2AttackSp){       // Faster attack speed goes first
@@ -232,6 +242,7 @@
 
             }
             
+            
             else{
                 // Character 2's Turn
                 if($char1ArmDef >= $char2WeapDam){
@@ -239,6 +250,10 @@
                 }
                 else{
                     $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
+                    if($char1Health <= 0){
+                        echo "<b> <center>  $char2Name Wins!!! </center> </b>";
+                        break;
+                    }
                 }
                 
                 // Character 1's Turn
@@ -247,17 +262,26 @@
                 }
                 else{
                     $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
+                    if($char2Health <= 0){
+                        echo "<b> <center> $char1Name Wins!!! </center> </b>";
+                        break;
+                    }
                 }
+                
                 
             }
             
-            //echo "<br>";
-            //echo "Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> ";
-            
         }
-
+            
         echo "<br> <center> FINAL RESULTS </center> <br>";
         echo "<center> $char1Name : Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> $char2Name : Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> <br> </center>";
+            
+        }
+            
+        else{
+            echo " <br> <center> Missing a Fighter... </center> <br> ";
+        }
+        
     }
     
 
