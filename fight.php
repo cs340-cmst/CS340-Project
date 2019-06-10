@@ -15,39 +15,26 @@
 
 </body>
 
-<body>
+
 <h2 class="arena"> ARENA NAME </h2>
 <form>
 <?php getMap(); ?>
 </form>
 
 
-<div class="row">
-<div class="column">
+<!-- <div class="row"> -->
+<div>
 <h1 class="test"> Your Character </h1>
 <form action="arena.php" method="POST">
 <?php getChars(); ?>
-</form>
-</div>
-
-<div class="column">
-<h1 class="test"> VS </h1>
-<form action="arena.php" method="POST">
+<h1 class="test"> Enemy Character </h1>
+<?php getEnemyChar(); ?>
 <input type="submit" value="FIGHT" class="block">
 </form>
 </div>
 
-<div class="column">
-<h1 class="test"> Enemy Character </h1>
-<form action="arena.php" method="POST">
-<?php getEnemyChar(); ?>
-</form>
-</div>
-
-
-</div>
-
-
+<!-- </div>
+</div> -->
 
 </body>
 </html>
@@ -63,7 +50,7 @@
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-                $toINSERT = '<input type="radio" name="character">';
+                $toINSERT = '<input type="radio" name="character" value="'. $row["name"]. '">';
                 $toINSERT = $toINSERT. $row["name"];
                 $toINSERT = $toINSERT. '<br>';
                 $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
@@ -72,7 +59,7 @@
                 $toINSERT = $toINSERT. 'Level:'. $row["level"]. ' ';
                 $toINSERT = $toINSERT. 'cID:'. $row["cID"].'<br>';
                 $toINSERT = $toINSERT. '<br>';
-                $_SESSION['user'] = $row["cID"];
+                
                 
                 echo $toINSERT;
             }
