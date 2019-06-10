@@ -72,6 +72,7 @@
                 $toINSERT = $toINSERT. 'Level:'. $row["level"]. ' ';
                 $toINSERT = $toINSERT. 'cID:'. $row["cID"].'<br>';
                 $toINSERT = $toINSERT. '<br>';
+                $_SESSION['user'] = $row["cID"];
                 
                 echo $toINSERT;
             }
@@ -93,7 +94,8 @@
         $result = $conn->query($query);
         
         $row = $result->fetch_assoc();
-        $toINSERT = '<input name = "areanaMap" class="drop" value="'.$row["name"].'">';
+        $toINSERT = '<input name = "arenaMap" class="drop" value="'.$row["name"].'">';
+        $_SESSION['mapName'] = $row["name"];
         echo $toINSERT;
         
         $conn->close();
@@ -116,6 +118,7 @@
             $toINSERT = $toINSERT. 'Attack Speed:'. $row["attack speed"]. ' ';
             $toINSERT = $toINSERT. 'Level:'. $row["level"]. ' ';
             $toINSERT = $toINSERT. 'cID:'. $row["cID"].'<br>';
+            $_SESSION['enemy'] = $row["cID"];
             
             echo $toINSERT;
         }
