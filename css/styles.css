@@ -63,10 +63,6 @@ form {
     background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
 }
 
-#arena-background {
-    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-snow.jpg');
-}
-
 #row {
     display: flex;
 }
