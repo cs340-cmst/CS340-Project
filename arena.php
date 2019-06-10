@@ -8,23 +8,30 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-
-<body id="arena-background">
-
 <?php include('includes/header.php') ?>
 
+<?php
+    $map_Name = "http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-";
+    $map_Name .= $_SESSION['mapName'];
+    $map_Name .= ".jpg";
+    //echo $map_Name;
+    
+    $map = "<body background=";
+    $map .= $map_Name;
+    echo $map;
+?>
 
 <div class="row">
 
-    <div class="column" style="background-color: rgba(225, 225, 225, .3);" >
+    <div class="column" style="background-color: rgba(235, 235, 235, .5);" >
         <?php get_Char1Stats(); ?>
     </div>
 
-    <div class="column" style="background-color: rgba(235, 235, 235, .3);" >
+    <div class="column" style="background-color: rgba(235, 235, 235, .4);" >
         <?php get_Char2Stats(); ?>
     </div>
 
-    <div style="background-color: rgba(255, 255, 255, .4);" >
+    <div style="background-color: rgba(235, 235, 235, .3);" >
         <?php fightTillDeath(); ?>
     </div>
 
@@ -44,19 +51,13 @@
     function get_Char1Stats(){
         require('includes/dbconnection.php');
         
-        $Username = $_SESSION['username'];
+        //$Username = $_SESSION['username'];
         //$CharID = '3';          // -- Godd Howard is just for testing -- //
-        //$CharID = $_POST['character'];
-        
-        //echo "HERE...";
-        //echo $_POST["character"];
-        //echo "$CharID";
+        $CharID = $_SESSION['user'];
         
         global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
         
-        //$query = "SELECT * FROM Characters WHERE username = '$Username' AND cID = '$CharID'";
         $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
-        //$query = "SELECT * FROM Characters WHERE name = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
@@ -118,24 +119,20 @@
         //echo "$char1ArmDefa + $char1ArmDefb + $char1ArmDefc + $char1ArmDefd <br> ";
         $char1ArmDef = $char1ArmDefa + $char1ArmDefb + $char1ArmDefc + $char1ArmDefd;
         
-        
-        
         echo "Attack Damage = $char1WeapDam <br>";
         echo "Armor Defence = $char1ArmDef <br>";
-        
     }
     
     
     function get_Char2Stats(){
         require('includes/dbconnection.php');
         
-        $Username = $_SESSION['username'];
-        $CharID = '11';          // -- Hodor is just for testing -- //
-        //$CharID = $_POST["enemyCharacter"];
+        //$Username = $_SESSION['username'];
+        //$CharID = '11';          // -- Hodor is just for testing -- //
+        $CharID = $_SESSION['enemy'];
         
         global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar2;
         
-        //$query = "SELECT * FROM Characters WHERE username = '$Username' AND cID = '$CharID'";
         $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
         $result = $conn->query($query);
         
@@ -202,7 +199,6 @@
         
         echo "Attack Damage = $char2WeapDam <br>";
         echo "Armor Defence = $char2ArmDef <br>";
-        
     }
     
     
@@ -263,7 +259,7 @@
                 else{
                     $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
                     if($char2Health <= 0){
-                        echo "<b> <center> $char1Name Wins!!! </center> </b>";
+                        echo "<b> <center> $char1Name Wins!!!</center> </b>";
                         break;
                     }
                 }
@@ -275,7 +271,6 @@
             
         echo "<br> <center> FINAL RESULTS </center> <br>";
         echo "<center> $char1Name : Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> $char2Name : Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> <br> </center>";
-            
         }
             
         else{
