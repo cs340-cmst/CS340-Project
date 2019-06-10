@@ -11,8 +11,11 @@
 <?php include('includes/header.php') ?>
 
 <?php
+    $Arena = "";
+    $Arena = $_SESSION['mapName'];
+    
     $map_Name = "http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-";
-    $map_Name .= $_SESSION['mapName'];
+    $map_Name .= $Arena;
     $map_Name .= ".jpg";
     //echo $map_Name;
     
@@ -38,14 +41,15 @@
 </div>
 
 
+
 </body>
 </html>
 
 
 <?php
-    $char1Name = $char1Health = $char1Defense = $char1AttackSp = $char1WeapDam = $char1ArmDef = "";
-    $char2Name = $char2Health = $char2Defense = $char2AttackSp = $char2WeapDam = $char2ArmDef = "";
- 
+    $char1ID = $char1Name = $char1Health = $char1Defense = $char1AttackSp = $char1WeapDam = $char1ArmDef = "";
+    $char2ID =$char2Name = $char2Health = $char2Defense = $char2AttackSp = $char2WeapDam = $char2ArmDef = "";
+    $Winner = $Loser = "";
     $NoChar1 = $NoChar2 = 0;
     
     function get_Char1Stats(){
@@ -55,13 +59,15 @@
         $CharID = $_POST['character'];
         $user = $_SESSION['username'];
         
-        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
+        global $char1ID, $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
         
         $query = "SELECT * FROM Characters WHERE name = '$CharID' and username = '$user'";
+        //$query = "SELECT * FROM Characters WHERE name = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
+                $char1ID = $row["cID"];
                 $char1Name = $row["name"];
                 $char1Health = $row["health"];
                 $char1Defense = $row["defense"];
@@ -124,6 +130,7 @@
     }
     
     
+  
     function get_Char2Stats(){
         require('includes/dbconnection.php');
         
@@ -131,13 +138,14 @@
         //$CharID = '11';          // -- Hodor is just for testing -- //
         $CharID = $_SESSION['enemy'];
         
-        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar2;
+        global $char2ID, $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar2;
         
         $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
+                $char2ID = $row["cID"];
                 $char2Name = $row["name"];
                 $char2Health = $row["health"];
                 $char2Defense = $row["defense"];
@@ -203,8 +211,9 @@
     
     
     function fightTillDeath() {
-        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
-        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar12;
+        global $char1ID, $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
+        global $char2ID, $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar12;
+        global $Winner, $Loser;
  
         if($NoChar1 == 0 && $NoChar1 == 0){
         
@@ -220,6 +229,8 @@
                     $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
                     if($char2Health <= 0){
                         echo "<b> <center> $char1Name Wins!!! </center> </b>";
+                        $Winner = $char1ID;
+                        $Loser = $char2ID;
                         break;
                     }
                 }
@@ -232,6 +243,8 @@
                     $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
                     if($char1Health <= 0){
                         echo "<b> <center>  $char2Name Wins!!! </center> </b>";
+                        $Winner = $char2ID;
+                        $Loser = $char1ID;
                         break;
                     }
                 }
@@ -248,6 +261,8 @@
                     $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
                     if($char1Health <= 0){
                         echo "<b> <center>  $char2Name Wins!!! </center> </b>";
+                        $Winner = $char2ID;
+                        $Loser = $char1ID;
                         break;
                     }
                 }
@@ -260,6 +275,8 @@
                     $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
                     if($char2Health <= 0){
                         echo "<b> <center> $char1Name Wins!!!</center> </b>";
+                        $Winner = $char1ID;
+                        $Loser = $char2ID;
                         break;
                     }
                 }
@@ -270,7 +287,10 @@
         }
             
         echo "<br> <center> FINAL RESULTS </center> <br>";
-        echo "<center> $char1Name : Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> $char2Name : Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> <br> </center>";
+        echo "<center> $char1Name : Health = $char1Health, Armor Def = $char1ArmDef <br> $char2Name : Health = $char2Health, Armor Def = $char2ArmDef <br> <br> </center>";
+            
+            
+            updateBattles();
         }
             
         else{
@@ -280,4 +300,19 @@
     }
     
 
+    
+    function updateBattles(){
+        global $Winner, $Loser, $Arena;
+        
+        require('includes/dbconnection.php');
+        $query = "INSERT INTO `Battles` (`bID`,`winner`, `loser`, `arena`) VALUES ('', '$Winner', '$Loser', '$Arena')";
+        
+        $stmt = mysqli_prepare($conn, $query);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_close($conn);
+        return $result;
+        
+    }
+    
+    
 ?>
