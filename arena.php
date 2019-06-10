@@ -47,8 +47,8 @@
 
 
 <?php
-    $char1ID = $char1Name = $char1Health = $char1Defense = $char1AttackSp = $char1WeapDam = $char1ArmDef = "";
-    $char2ID =$char2Name = $char2Health = $char2Defense = $char2AttackSp = $char2WeapDam = $char2ArmDef = "";
+    $char1ID = $char1Name = $char1Health = $char1Defense = $char1AttackSp = $char1WeapDam = $char1ArmDef = $char1XP = "";
+    $char2ID =$char2Name = $char2Health = $char2Defense = $char2AttackSp = $char2WeapDam = $char2ArmDef = $char2XP = "";
     $Winner = $Loser = "";
     $NoChar1 = $NoChar2 = 0;
     
@@ -59,7 +59,7 @@
         $CharID = $_POST['character'];
         $user = $_SESSION['username'];
         
-        global $char1ID, $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
+        global $char1ID, $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $char1XP, $NoChar1;
         
         $query = "SELECT * FROM Characters WHERE name = '$CharID' and username = '$user'";
         //$query = "SELECT * FROM Characters WHERE name = '$CharID'";
@@ -72,6 +72,7 @@
                 $char1Health = $row["health"];
                 $char1Defense = $row["defense"];
                 $char1AttackSp = $row["attack speed"];
+                $char1XP = $row["xp"];
                 
                 $char1wepID = $row["wID"]; // Will be used in second SQL query
                 $char1armID = $row["aID"]; // Will be used in third SQL query
@@ -138,7 +139,7 @@
         //$CharID = '11';          // -- Hodor is just for testing -- //
         $CharID = $_SESSION['enemy'];
         
-        global $char2ID, $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar2;
+        global $char2ID, $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $char2XP, $NoChar2;
         
         $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
         $result = $conn->query($query);
@@ -150,6 +151,7 @@
                 $char2Health = $row["health"];
                 $char2Defense = $row["defense"];
                 $char2AttackSp = $row["attack speed"];
+                $char2XP = $row["xp"];
                 
                 $char2wepID = $row["wID"]; // Will be used in second SQL query
                 $char2armID = $row["aID"]; // Will be used in third SQL query
@@ -291,6 +293,7 @@
             
             
             updateBattles();
+            updateXP();
         }
             
         else{
@@ -311,6 +314,35 @@
         $result = mysqli_stmt_execute($stmt);
         mysqli_close($conn);
         return $result;
+        
+    }
+    
+    function updateXP(){
+        global $char1XP, $char2XP, $Winner, $char1ID, $char2ID;
+        
+        require('includes/dbconnection.php');
+        
+        if ($Winner == $char1ID){
+            $char1NewXP = $char1XP + 10;
+            
+            $query = "UPDATE Characters SET xp = '$char1NewXP' WHERE cID = '$char1ID'";
+            $stmt = mysqli_prepare($conn, $query);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_close($conn);
+            return $result;
+        }
+        
+        else{
+            $char2NewXP = $char2XP + 10;
+            
+            $query = "UPDATE Characters SET xp = '$char2NewXP' WHERE cID = '$char2ID'";
+            $stmt = mysqli_prepare($conn, $query);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_close($conn);
+            return $result;
+        }
+        
+        
         
     }
     
