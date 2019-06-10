@@ -23,7 +23,7 @@
     </div>
 
     <div id="site-brief">
-        A turn based 1v1 fight simulator.
+        A truly epic 1v1 fight simulator.
     </div>
 </div>
 
