@@ -2,48 +2,52 @@
 <?php
     session_start();
     // Check that a user is logged in within the $_SESSION variable.
-    
-    ?>
-<html>
+    ob_start();
 
+    if(isset($_POST['CharName']) && isset($_POST['CharWeapon']) && isset($_POST['CharArmor']) && isset($_POST['CharClass'])){
+        $outcome = createCharacter();
+        if($outcome){
+            $host = $_SERVER['HTTP_HOST'];
+            $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+            $extra = 'index.php';
+            header("Location: http://$host$uri/$extra");  
+        }
+    }
+?>
+<html>
+<script>
+    if(performance.navigation.type == 2){
+        location.reload(true);
+    }
+</script>    
 <head>
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/forms.css">
 </head>
-
 <body class="body-MK2" onload="CharSheild()">
     
 <?php include('includes/header.php') ?>
 <div id="Creation-Form">    
 <form action="create.php" method="post">
-<h1>Character Creation<br><?php echo getNumberChars();?>/5</h1>
-<input class="text-box" type="text" name="CharName" maxlength="20" size="20" placeholder="Character Name" required><br>
-<select name="CharClass" id="CharClass" class="Drop-Down" style="position: relative;" required>
-    <option value="">Select Class</option>
-    <option value="1">Warrior</option>
-    <option value="2">Mage</option>
-    <option value="3">Rogue</option>
-    <option value="4">Necromancer</option>
-    <option value="5">Priest</option>
-</select><br>
-<select name="CharWeapon" id="Weapon" class="Drop-Down" style="position: relative;" required>
-    <?php getWeapons(); ?>
-</select><br>
-<select name="CharArmor" id="Armor"  class="Drop-Down" style="position: relative;" required>
-    <?php getArmors(); ?>
-</select><br>
-<input type="submit" class="button" id="subButton" value="Submit" style="position: relative;">
+    <h1>Character Creation<br><?php echo getNumberChars();?>/5</h1>
+    <input class="text-box" type="text" name="CharName" maxlength="20" size="20" placeholder="Character Name" required><br>
+    <select name="CharClass" id="CharClass" class="Drop-Down" style="position: relative;" required>
+        <option value="">Select Class</option>
+        <option value="1">Warrior</option>
+        <option value="2">Mage</option>
+        <option value="3">Rogue</option>
+        <option value="4">Necromancer</option>
+        <option value="5">Priest</option>
+    </select><br>
+    <select name="CharWeapon" id="Weapon" class="Drop-Down" style="position: relative;" required>
+        <?php getWeapons(); ?>
+    </select><br>
+    <select name="CharArmor" id="Armor"  class="Drop-Down" style="position: relative;" required>
+        <?php getArmors(); ?>
+    </select><br>
+    <input type="submit" class="button" id="subButton" value="Submit" style="position: relative;">
 </form>
-<?php
-    if(isset($_POST['CharName']) && isset($_POST['CharWeapon']) && isset($_POST['CharArmor']) && isset($_POST['CharClass'])){
-        $outcome = createCharacter();
-        if($outcome){
-            echo "<p style=\"color: green\";>Character Created</p>";
-        } else {
-            echo "<p style=\"color: red\";>Im sorry, something went wrong<p>";
-        }
-    }
-?>
+    
 
    
 </div>  
@@ -153,5 +157,12 @@
             mysqli_close($conn);
             return $result;
         }
+    }
+
+    function redirect_user() {
+        $host = $_SERVER['HTTP_HOST'];
+        $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'index.php';
+        header("Location: http://$host$uri/$extra");
     }
 ?>
