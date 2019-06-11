@@ -7,7 +7,8 @@
 <html>
 
 <head>
-<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/forms.css" />
 </head>
 
 <body background="assets/ProfileBR.jpg" style="background-repeat: no-repeat; background-size: cover; background-color: black;">
@@ -24,7 +25,7 @@
         <button class="btn btnH" style="background-color: darkred; width: 60px;"> Hp. </button>
         <button class="btn btnM" style="background-color: lightskyblue; width: 60px;"> Def. </button>
         <button class="btn btnS" style="background-color: green; width: 60px;"> Atk. </button>
-        
+        <button class="btn btnX" style="background-color: mediumpurple; width: 60px;"> XP </button>        
     </div>
     </div>
 </div>
@@ -41,7 +42,7 @@
         require('includes/dbconnection.php');
         $Username = $_SESSION['username'];
         
-        $query = "SELECT * FROM Characters WHERE username = '$Username'";
+        $query = "SELECT * FROM ((Characters INNER JOIN (SELECT name AS wName, wID FROM Weapons) AS weapon ON Characters.wID = weapon.wID) INNER JOIN (SELECT name AS aName, aID FROM ArmorSets) AS armor ON Characters.aID = armor.aID) Where Characters.username = '$Username'";
         
         $result = $conn->query($query);
         
@@ -51,7 +52,9 @@
                 $toINSERT = '<div id="row" style="background-color: rgba(0,0,0,0.5); border: 3px solid black;">';
                 $toINSERT = $toINSERT. '<div id="column">';
                 $toINSERT = $toINSERT.'<p style="color: white;">';
-                $toINSERT = $toINSERT. $row["name"] . '</p>';
+                $toINSERT = $toINSERT. $row["name"] . '<br>';
+                $toINSERT = $toINSERT. 'Weapon:  ' . $row["wName"] . '<br>';
+                $toINSERT = $toINSERT. 'Armor:  ' . $row["aName"] . '</p>';    
                 $toINSERT = $toINSERT.'</div>';
                 $toINSERT = $toINSERT.'<div id="column"><div id = "stats"><p style="color: white;">Stats: <p><button class="btn btnH" style="background-color: darkred; width: 60px;">';
                 $toINSERT = $toINSERT . $row["health"];
@@ -59,6 +62,11 @@
                 $toINSERT = $toINSERT . $row["defense"];
                 $toINSERT = $toINSERT . '</button> <button class="btn btnS" style="background-color: green; width: 60px;">';
                 $toINSERT = $toINSERT . $row["attack speed"];
+                $toINSERT = $toINSERT. '</button>';
+                $toINSERT = $toINSERT. '<button class="btn btnX" style="background-color: mediumpurple; width: 80px; left: 20px;">';
+                $toINSERT = $toINSERT . $row["xp"];
+                $toINSERT = $toINSERT . "/";
+                $toINSERT = $toINSERT . $row["xpThreshold"];
                 $toINSERT = $toINSERT. '</button></div></div></div>';
                 echo $toINSERT;
             }
