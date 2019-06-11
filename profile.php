@@ -49,10 +49,10 @@
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
-//                $aVal = 0;
-//                $hVal = 0;
-//                $wVal = 0;
-//                getVals($aVal, $wVal, $wVal, $row["aID"], $row["wID"]);
+                $aVal = 0;
+                $hVal = 0;
+                $wVal = 0;
+                getVals($aVal, $wVal, $hVal, $row["aID"], $row["wID"]);
                 $toINSERT = '<div id="row" style="background-color: rgba(0,0,0,0.5); border: 3px solid black;">';
                 $toINSERT = $toINSERT. '<div id="column">';
                 $toINSERT = $toINSERT.'<p style="color: white;">';
@@ -61,11 +61,11 @@
                 $toINSERT = $toINSERT. 'Armor:  ' . $row["aName"] . '</p>';    
                 $toINSERT = $toINSERT.'</div>';
                 $toINSERT = $toINSERT.'<div id="column"><div id = "stats"><p style="color: white;">Stats: <p><button class="btn btnH" style="background-color: darkred; width: 60px;">';
-                $toINSERT = $toINSERT . $row["health"];
+                $toINSERT = $toINSERT . (intval($row["health"]) + $hVal);
                 $toINSERT = $toINSERT . '</button> <button class="btn btnM" style="background-color: lightskyblue; width: 60px;">';
-                $toINSERT = $toINSERT . $row["defense"];
+                $toINSERT = $toINSERT . (intval($row["defense"]) + $aVal);
                 $toINSERT = $toINSERT . '</button> <button class="btn btnS" style="background-color: green; width: 60px;">';
-                $toINSERT = $toINSERT . $row["attack speed"];
+                $toINSERT = $toINSERT . (intval($row["attack speed"]) + $wVal);
                 $toINSERT = $toINSERT. '</button>';
                 $toINSERT = $toINSERT. '<button class="btn btnX" style="background-color: mediumpurple; width: 80px; left: 20px;">';
                 $toINSERT = $toINSERT . $row["xp"];
@@ -81,14 +81,14 @@
         $conn->close();
     } 
 
-//    function getVals(&$aVal, &$wVal, &$hVal, $aID, $wID){
-//            require('includes/dbconnection.php');
-//            $query2 = "SELECT * FROM(((SELECT name as wName, damage FROM Weapons WHERE wID = '$wID') as weapon) JOIN ((SELECT * FROM ArmorSets WHERE aID = '$aID') AS armor))";
-//            $result2 = $conn->query($query2); 
-//            $row = $result2->fetch_assoc();
-//            $aVal = intval($row["helmet"]) + intval($row["legs"]);
-//            $wVal = intval($row["shield"]) + intval($row["damage"]);
-//            $hVal = intval($row["chest"]);
-//            $conn->close();    
-//    }
+    function getVals(&$aVal, &$wVal, &$hVal, $aID, $wID){
+            require('includes/dbconnection.php');
+            $query2 = "SELECT * FROM(((SELECT name as wName, damage FROM Weapons WHERE wID = '$wID') as weapon) JOIN ((SELECT * FROM ArmorSets WHERE aID = '$aID') AS armor))";
+            $result2 = $conn->query($query2); 
+            $row = $result2->fetch_assoc();
+            $aVal = intval($row["helmet"]) + intval($row["legs"]);
+            $wVal = intval($row["shield"]) + intval($row["damage"]);
+            $hVal = intval($row["chest"]);
+            $conn->close();    
+    }
     ?>
