@@ -323,7 +323,7 @@
         require('includes/dbconnection.php');
         
         if ($Winner == $char1ID){
-            $char1NewXP = $char1XP + 10;
+            $char1NewXP = $char1XP + 25;
             
             $query = "UPDATE Characters SET xp = '$char1NewXP' WHERE cID = '$char1ID'";
             $stmt = mysqli_prepare($conn, $query);
@@ -333,7 +333,7 @@
         }
         
         else{
-            $char2NewXP = $char2XP + 10;
+            $char2NewXP = $char2XP + 25;
             
             $query = "UPDATE Characters SET xp = '$char2NewXP' WHERE cID = '$char2ID'";
             $stmt = mysqli_prepare($conn, $query);
