@@ -23,12 +23,12 @@
     </div>
 
     <div id="site-brief">
-        A turn based 1v1 fight simulator.
+        A truly epic 1v1 fight simulator.
     </div>
 </div>
 
 <div class="row">
-    <div id="top-3-boxes">
+    <div class="top-3">
         <div class="top-3-box" id="front-page-most-kills">
             <div class="top-3-header">Top Kills</div>
             <div class="top-3-row number-one" id="kills-1">
@@ -47,7 +47,9 @@
                 <div id="most-kills-kills-3"></div>
             </div>
         </div>
+    </div>
 
+    <div class="top-3">
         <div class="top-3-box" id="front-page-highest-level">
             <div class="top-3-header">Highest Level</div>
             <div class="top-3-row number-one" id="level-1">

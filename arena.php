@@ -8,16 +8,38 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
 
-//<body style="background-color: grey;">
-<body id="arena-background">  // Change this with the correct ARENA
-
 <?php include('includes/header.php') ?>
 
-<div>
-    <?php get_Char1Stats(); ?>
-    <?php get_Char2Stats(); ?>
-    <?php fightTillDeath(); ?>
+<?php
+    $Arena = "";
+    $Arena = $_SESSION['mapName'];
+    
+    $map_Name = "http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-";
+    $map_Name .= $Arena;
+    $map_Name .= ".jpg";
+    //echo $map_Name;
+    
+    $map = "<body background=";
+    $map .= $map_Name;
+    echo $map;
+?>
+
+<div class="row">
+
+    <div class="column" style="background-color: rgba(235, 235, 235, .5);" >
+        <?php get_Char1Stats(); ?>
+    </div>
+
+    <div class="column" style="background-color: rgba(235, 235, 235, .4);" >
+        <?php get_Char2Stats(); ?>
+    </div>
+
+    <div style="background-color: rgba(235, 235, 235, .3);" >
+        <?php fightTillDeath(); ?>
+    </div>
+
 </div>
+
 
 
 </body>
@@ -25,27 +47,32 @@
 
 
 <?php
-    $char1Name = $char1Health = $char1Defense = $char1AttackSp = $char1WeapDam = $char1ArmDef = "";
-    $char2Name = $char2Health = $char2Defense = $char2AttackSp = $char2WeapDam = $char2ArmDef = "";
- 
+    $char1ID = $char1Name = $char1Health = $char1Defense = $char1AttackSp = $char1WeapDam = $char1ArmDef = $char1XP = "";
+    $char2ID =$char2Name = $char2Health = $char2Defense = $char2AttackSp = $char2WeapDam = $char2ArmDef = $char2XP = "";
+    $Winner = $Loser = "";
+    $NoChar1 = $NoChar2 = 0;
     
     function get_Char1Stats(){
         require('includes/dbconnection.php');
         
-        $Username = $_SESSION['username'];
-        $Charname = 'Fred';  // -- Fred is just for testing -- //
+        //$CharID = '3';          // -- Godd Howard is just for testing -- //
+        $CharID = $_POST['character'];
+        $user = $_SESSION['username'];
         
-        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef;
+        global $char1ID, $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $char1XP, $NoChar1;
         
-        $query = "SELECT * FROM Characters WHERE username = '$Username' AND name = '$Charname'";
+        $query = "SELECT * FROM Characters WHERE name = '$CharID' and username = '$user'";
+        //$query = "SELECT * FROM Characters WHERE name = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
+                $char1ID = $row["cID"];
                 $char1Name = $row["name"];
                 $char1Health = $row["health"];
                 $char1Defense = $row["defense"];
                 $char1AttackSp = $row["attack speed"];
+                $char1XP = $row["xp"];
                 
                 $char1wepID = $row["wID"]; // Will be used in second SQL query
                 $char1armID = $row["aID"]; // Will be used in third SQL query
@@ -63,7 +90,8 @@
                 echo $toINSERT;
             }
         } else {
-            echo "No Character Selected";
+            echo "No Character Selected <br> ";
+            $NoChar1 = 1;
         }
         
         //----------- Weapon SQL ----------- //
@@ -98,31 +126,32 @@
         //echo "$char1ArmDefa + $char1ArmDefb + $char1ArmDefc + $char1ArmDefd <br> ";
         $char1ArmDef = $char1ArmDefa + $char1ArmDefb + $char1ArmDefc + $char1ArmDefd;
         
-        
-        
         echo "Attack Damage = $char1WeapDam <br>";
         echo "Armor Defence = $char1ArmDef <br>";
-        
     }
     
     
+  
     function get_Char2Stats(){
         require('includes/dbconnection.php');
         
-        $Username = $_SESSION['username'];
-        $Charname = 'Picard-io';  // -- Picard-io is just for testing -- //
+        //$Username = $_SESSION['username'];
+        //$CharID = '11';          // -- Hodor is just for testing -- //
+        $CharID = $_SESSION['enemy'];
         
-        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef;
+        global $char2ID, $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $char2XP, $NoChar2;
         
-        $query = "SELECT * FROM Characters WHERE username = '$Username' AND name = '$Charname'";
+        $query = "SELECT * FROM Characters WHERE cID = '$CharID'";
         $result = $conn->query($query);
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
+                $char2ID = $row["cID"];
                 $char2Name = $row["name"];
                 $char2Health = $row["health"];
                 $char2Defense = $row["defense"];
                 $char2AttackSp = $row["attack speed"];
+                $char2XP = $row["xp"];
                 
                 $char2wepID = $row["wID"]; // Will be used in second SQL query
                 $char2armID = $row["aID"]; // Will be used in third SQL query
@@ -140,7 +169,8 @@
                 echo $toINSERT;
             }
         } else {
-            echo "No Character Selected";
+            echo "No Character Selected <br> ";
+            $NoChar2 = 1;
         }
         
         //----------- Weapon SQL ----------- //
@@ -179,14 +209,16 @@
         
         echo "Attack Damage = $char2WeapDam <br>";
         echo "Armor Defence = $char2ArmDef <br>";
-        
     }
     
     
     function fightTillDeath() {
-        global $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef;
-        global $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef;
+        global $char1ID, $char1Name, $char1Health, $char1Defense, $char1AttackSp, $char1WeapDam, $char1ArmDef, $NoChar1;
+        global $char2ID, $char2Name, $char2Health, $char2Defense, $char2AttackSp, $char2WeapDam, $char2ArmDef, $NoChar12;
+        global $Winner, $Loser;
  
+        if($NoChar1 == 0 && $NoChar1 == 0){
+        
         while (True){
             
             if($char1AttackSp >= $char2AttackSp){       // Faster attack speed goes first
@@ -199,6 +231,8 @@
                     $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
                     if($char2Health <= 0){
                         echo "<b> <center> $char1Name Wins!!! </center> </b>";
+                        $Winner = $char1ID;
+                        $Loser = $char2ID;
                         break;
                     }
                 }
@@ -210,12 +244,15 @@
                 else{
                     $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
                     if($char1Health <= 0){
-                        echo "<b> <center> $char2Name Wins!!! </center> </b>";
+                        echo "<b> <center>  $char2Name Wins!!! </center> </b>";
+                        $Winner = $char2ID;
+                        $Loser = $char1ID;
                         break;
                     }
                 }
 
             }
+            
             
             else{
                 // Character 2's Turn
@@ -224,6 +261,12 @@
                 }
                 else{
                     $char1Health = $char1Health - $char2WeapDam;          // When armor is broken, do damage
+                    if($char1Health <= 0){
+                        echo "<b> <center>  $char2Name Wins!!! </center> </b>";
+                        $Winner = $char2ID;
+                        $Loser = $char1ID;
+                        break;
+                    }
                 }
                 
                 // Character 1's Turn
@@ -232,18 +275,76 @@
                 }
                 else{
                     $char2Health = $char2Health - $char1WeapDam;          // When armor is broken, do damage
+                    if($char2Health <= 0){
+                        echo "<b> <center> $char1Name Wins!!!</center> </b>";
+                        $Winner = $char1ID;
+                        $Loser = $char2ID;
+                        break;
+                    }
                 }
+                
                 
             }
             
-            //echo "<br>";
-            //echo "Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> ";
-            
         }
-
+            
         echo "<br> <center> FINAL RESULTS </center> <br>";
-        echo "<center> CHARACTER 1: Health = $char1Health, Defence = $char1Defense, Attack Speed = $char1AttackSp, Attack Dam = $char1WeapDam, Armor Def = $char1ArmDef <br> CHARACTER 2: Health = $char2Health, Defence = $char2Defense, Attack Speed = $char2AttackSp, Attack Dam =$char2WeapDam, Armor Def = $char2ArmDef <br> </center>";
+        echo "<center> $char1Name : Health = $char1Health, Armor Def = $char1ArmDef <br> $char2Name : Health = $char2Health, Armor Def = $char2ArmDef <br> <br> </center>";
+            
+            
+            updateBattles();
+            updateXP();
+        }
+            
+        else{
+            echo " <br> <center> Missing a Fighter... </center> <br> ";
+        }
+        
     }
     
 
-    ?>
+    
+    function updateBattles(){
+        global $Winner, $Loser, $Arena;
+        
+        require('includes/dbconnection.php');
+        $query = "INSERT INTO `Battles` (`bID`,`winner`, `loser`, `arena`) VALUES ('', '$Winner', '$Loser', '$Arena')";
+        
+        $stmt = mysqli_prepare($conn, $query);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_close($conn);
+        return $result;
+        
+    }
+    
+    function updateXP(){
+        global $char1XP, $char2XP, $Winner, $char1ID, $char2ID;
+        
+        require('includes/dbconnection.php');
+        
+        if ($Winner == $char1ID){
+            $char1NewXP = $char1XP + 10;
+            
+            $query = "UPDATE Characters SET xp = '$char1NewXP' WHERE cID = '$char1ID'";
+            $stmt = mysqli_prepare($conn, $query);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_close($conn);
+            return $result;
+        }
+        
+        else{
+            $char2NewXP = $char2XP + 10;
+            
+            $query = "UPDATE Characters SET xp = '$char2NewXP' WHERE cID = '$char2ID'";
+            $stmt = mysqli_prepare($conn, $query);
+            $result = mysqli_stmt_execute($stmt);
+            mysqli_close($conn);
+            return $result;
+        }
+        
+        
+        
+    }
+    
+    
+?>
