@@ -209,3 +209,19 @@ form {
   background-color: gray;
   color: white;
 }
+
+#map-name {
+    border: none;
+}
+
+#enemy-name {
+    border: none;
+}
+
+#map-name:focus {
+    outline-width: 0;
+}
+
+#enemy-name:focus {
+    outline-width: 0;
+}

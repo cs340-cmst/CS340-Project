@@ -81,7 +81,7 @@
         $result = $conn->query($query);
         
         $row = $result->fetch_assoc();
-        $toINSERT = '<input name = "arenaMap" class="drop" value="'.$row["name"].'">';
+        $toINSERT = '<input id="map-name" name = "arenaMap" class="drop" value="'.$row["name"].'" readonly>';
         $_SESSION['mapName'] = $row["name"];
         echo $toINSERT;
         
@@ -98,7 +98,7 @@
         $result = $conn->query($query);
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
-            $toINSERT = '<input name = "enemyCharacter" class="drop" value="'.$row["name"].'">';
+            $toINSERT = '<input id="enemy-name" name = "enemyCharacter" class="drop" value="'.$row["name"].'" readonly>';
             $toINSERT = $toINSERT. '<br>';
             $toINSERT = $toINSERT. 'Health:'. $row["health"]. ' ';
             $toINSERT = $toINSERT. 'Defense:'. $row["defense"]. ' ';
