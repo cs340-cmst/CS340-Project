@@ -7,14 +7,14 @@
     <ul>
         <?php
             // Add basic menu items.
-            $menuitems = array("Home" => "index.php", "Fight" => "fight.php", "About" => "about.php");
+            $menuitems = array("Home" => "index.php", "About" => "about.php");
             foreach ($menuitems as $label => $location) {
                 echo "<li><a href=$location>$label</a></li>";
             }
 
             // Add conditional menu items.
             $signedOutMenuItems = array("Signup" => "signup.php", "Login" => "login.php");
-            $signedInMenuItems = array("Profile" => "profile.php", "Create Character" => "create.php", "Logout" => "logout.php");
+            $signedInMenuItems = array("Profile" => "profile.php", "Create Character" => "create.php", "Fight" => "fight.php", "Logout" => "logout.php");
 
             if (!isset($_SESSION['username'])) {                        // Signed out.
                 foreach ($signedOutMenuItems as $label => $location) {
