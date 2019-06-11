@@ -49,6 +49,10 @@
         
         if($result->num_rows > 0){
             while($row = $result->fetch_assoc()){
+//                $aVal = 0;
+//                $hVal = 0;
+//                $wVal = 0;
+//                getVals($aVal, $wVal, $wVal, $row["aID"], $row["wID"]);
                 $toINSERT = '<div id="row" style="background-color: rgba(0,0,0,0.5); border: 3px solid black;">';
                 $toINSERT = $toINSERT. '<div id="column">';
                 $toINSERT = $toINSERT.'<p style="color: white;">';
@@ -75,5 +79,16 @@
         }
         
         $conn->close();
-    }  
+    } 
+
+//    function getVals(&$aVal, &$wVal, &$hVal, $aID, $wID){
+//            require('includes/dbconnection.php');
+//            $query2 = "SELECT * FROM(((SELECT name as wName, damage FROM Weapons WHERE wID = '$wID') as weapon) JOIN ((SELECT * FROM ArmorSets WHERE aID = '$aID') AS armor))";
+//            $result2 = $conn->query($query2); 
+//            $row = $result2->fetch_assoc();
+//            $aVal = intval($row["helmet"]) + intval($row["legs"]);
+//            $wVal = intval($row["shield"]) + intval($row["damage"]);
+//            $hVal = intval($row["chest"]);
+//            $conn->close();    
+//    }
     ?>
