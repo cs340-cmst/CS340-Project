@@ -1,6 +1,7 @@
 body {
     padding: 0;
     margin: 0;
+    font-size: 100%;
 }
 
 #site-banner img {
@@ -23,10 +24,121 @@ body {
 
 #nav-bar a {
     display: block;
+    padding: 0.75em 1em;
+    text-decoration: none;
+    font-size: 1.25em;
+    color: black;
+}
+
+#nav-bar li a:hover {
+    background-color: #8e6436;
+}
+
+form {
+    margin: 0.625em;
+}
+
+.error {
+    color: red;
+}
+
+#about-text {
+    background-color: grey;
+    width: 50vw;
+    border: 1em solid black;
+    padding: 3.125em;
+    margin: 1.25em;
+    color: black;
+    border-radius: 3em;
+}
+
+#about-header {
+    background-color: white;
+    border-radius: 3em;
+    width: 13vw;
+    margin: auto;
+}
+
+#about-background {
+    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
+}
+
+#row {
+    display: flex;
+}
+
+#column {
+    flex: 50%;
+}
+
+.btn {
+    color: Black;
+    font-size: 1em;
+    width: 6.25em;
+    border: 0;
+    display: inline-block;
+    border-radius: 0.625em;
+}
+
+.btn:hover {
+     box-shadow: 0 0.75em 1em 0 rgba(255,255,255,0.24),0 1em 3.125em 0 rgba(255,255,255,0.24);  
+}
+
+.btnH{
+    background-color: darkred;
+    
+}
+
+.btnM{
+    background-color: skyblue;
+    
+}
+
+.btnS{
+    background-color: darkgreen;
+    
+}
+
+.btnX{
+    background-color: mediumpurple;
+    
+}
+
+.error {
+    color: red;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#site-banner img {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+#nav-bar ul {
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #bc9c78;
+    text-align: center;
+}
+
+#nav-bar li {
+    text-align: center;
+    display: inline;
+}
+
+#nav-bar a {
     padding: 20px 26px;
     text-decoration: none;
     font-size: 20px;
     color: black;
+    display: inline-block;
 }
 
 #nav-bar li a:hover {
@@ -41,82 +153,55 @@ form {
     color: red;
 }
 
-#about-text {
-    background-color: grey;
-    width: 550px;
-    border: 15px solid black;
-    padding: 50px;
-    margin: 20px;
-}
-
-#about-background {
-    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
-}
-
-#arena-background {
-    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-snow.jpg');
-}
-
-#row {
-    display: flex;
-}
-
-#column {
-    flex: 50%;
-}
-
-.btn {
-    color: Black;
-    font-size: 16px;
-    width: 100px;
-    border: 0;
-    border-radius: 10px;
-}
-
-.btnH{
-    background-color: darkred;
-    
-}
-
-.btnH:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
-}
-
-.btnM{
-    background-color: skyblue;
-    
-}
-
-.btnM:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
-}
-
-.btnS{
-    background-color: darkgreen;
-    
-}
-
-.btnS:hover {
-     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);  
+.arena {
+  text-align: center;
 }
 
 
-.error {
-    color: red;
+* {
+  box-sizing: border-box;
 }
 
-#about-text {
-    background-color: grey;
-    width: 550px;
-    border: 15px solid black;
-    padding: 50px;
-    margin: 20px;
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  
 }
 
-#about-background {
-    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/about-dirt.jpg');
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-#arena-background {
-    background-image: url('http://web.engr.oregonstate.edu/~pemblec/CS340-Project/assets/arena-snow.jpg');
+.test {
+  text-align: center;
+}
+
+.drop{
+  width: 100%;
+  text-align: center;
+  text-align-last: center;
+  justify-content: center;
+}
+
+
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: red;
+  color: black;
+  padding: 14px 28px;
+  font-size: 30px;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+}
+
+.block:hover {
+  background-color: gray;
+  color: white;
 }
