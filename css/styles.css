@@ -76,25 +76,22 @@ form {
     font-size: 1em;
     width: 6.25em;
     border: 0;
+    display: inline-block;
     border-radius: 0.625em;
+}
+
+.btn:hover {
+     box-shadow: 0 0.75em 1em 0 rgba(255,255,255,0.24),0 1em 3.125em 0 rgba(255,255,255,0.24);  
+
 }
 
 .btnH{
     background-color: darkred;
     
 }
-
-.btnH:hover {
-     box-shadow: 0 0.75em 1em 0 rgba(0,0,0,0.24),0 1em 3.125em 0 rgba(0,0,0,0.19);  
-}
-
 .btnM{
     background-color: skyblue;
     
-}
-
-.btnM:hover {
-     box-shadow: 0 0.75em 1em 0 rgba(0,0,0,0.24),0 1em 3.125em 0 rgba(0,0,0,0.19);  
 }
 
 .btnS{
@@ -102,13 +99,20 @@ form {
     
 }
 
-.btnS:hover {
-     box-shadow: 0 0.75em 1em 0 rgba(0,0,0,0.24),0 1em 3.125em 0 rgba(0,0,0,0.19);  
+.btnX{
+    background-color: mediumpurple;
+    
 }
-
 
 .error {
     color: red;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -157,7 +161,6 @@ form {
 .arena {
   text-align: center;
 }
-
 
 * {
   box-sizing: border-box;

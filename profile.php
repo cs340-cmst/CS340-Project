@@ -7,7 +7,8 @@
 <html>
 
 <head>
-<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/forms.css" />
 </head>
 
 <body background="assets/ProfileBR.jpg" style="background-repeat: no-repeat; background-size: cover; background-color: black;">
@@ -24,7 +25,7 @@
         <button class="btn btnH" style="background-color: darkred; width: 60px;"> Hp. </button>
         <button class="btn btnM" style="background-color: lightskyblue; width: 60px;"> Def. </button>
         <button class="btn btnS" style="background-color: green; width: 60px;"> Atk. </button>
-        
+        <button class="btn btnX" style="background-color: mediumpurple; width: 60px;"> XP </button>        
     </div>
     </div>
 </div>
@@ -59,6 +60,11 @@
                 $toINSERT = $toINSERT . $row["defense"];
                 $toINSERT = $toINSERT . '</button> <button class="btn btnS" style="background-color: green; width: 60px;">';
                 $toINSERT = $toINSERT . $row["attack speed"];
+                $toINSERT = $toINSERT. '</button>';
+                $toINSERT = $toINSERT. '<button class="btn btnX" style="background-color: mediumpurple; width: 80px; left: 20px;">';
+                $toINSERT = $toINSERT . $row["xp"];
+                $toINSERT = $toINSERT . "/";
+                $toINSERT = $toINSERT . $row["xpThreshold"];
                 $toINSERT = $toINSERT. '</button></div></div></div>';
                 echo $toINSERT;
             }
