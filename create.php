@@ -121,11 +121,15 @@
 
     function createCharacter(){
         if(isset($_POST['CharName'])){
+            
             $Username = $_SESSION['username'];
             $CharName = $_POST['CharName'];
             $class = $_POST['CharClass'];
             $aID = $_POST["CharArmor"];
             $wID = $_POST["CharWeapon"]; 
+            $aVal = 0;
+            $wVal = 0;
+            $hVal = 0;
             if($class == 1){
                     $Defense = 5;
                     $Attack = 10;
@@ -147,8 +151,12 @@
                     $Attack = 2;
                     $Health = 150;                
             }
-
             require('includes/dbconnection.php');
+            getVals($aVal, $wVal, $hVal);
+            $Defense = Defense + $aVal;
+            $Attack = $Attck + $wVal;
+            $Health = $Health + $hVal;
+
             $query = "INSERT INTO `Characters` (`cID`,`name`, `health`, `defense`, `attack speed`, `level`, `username`, `wID`, `aID`, `xp`, `xpThreshold`, `wins`, `losses`) VALUES ('', '$CharName', '$Health', '$Defense', '$Attack', '1', '$Username', '$wID', '$aID', '0', '100', '0', '0')";
 
 
@@ -159,6 +167,21 @@
         }
     }
 
+    function getVals(&$aVal, &$wVal, &$hVal){
+        if(isset($_POST['CharName'])){
+        require('includes/dbconnection.php');
+        $aID = $_POST["CharArmor"];
+        $wID = $_POST["CharWeapon"]; 
+        $query2 = "SELECT * FROM(((SELECT name as wName, damage FROM Weapons WHERE wID = '$wID') as weapon) JOIN ((SELECT * FROM ArmorSets WHERE aID = '$aID') AS armor))";
+        $result2 = $conn->query($query2); 
+        $row = $result2->fetch_assoc();
+        $aVal = intval($row["helmet"]) + intval($row["legs"]);
+        $wVal = intval($row["shield"]) + intval($row["damage"]);
+        $hVal = intval($row["chest"]);
+        $conn->close();    
+        }
+    }
+    
     function redirect_user() {
         $host = $_SERVER['HTTP_HOST'];
         $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
